@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HOME</title>
+<title>EMPLOYEES LIST</title>
+
 
 
 <link
@@ -12,31 +14,49 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
+
 </head>
+
+
 <body>
 	<ul class="nav justify-content-center nav-tabs nav-pills">
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="/">HOME</a></li>
+		<li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
 		<li class="nav-item"><a class="nav-link" href="/department/list">부서정보</a></li>
 		<li class="nav-item"><a class="nav-link" href="/location/list">지역정보</a></li>
-		<li class="nav-item"><a class="nav-link" href="/employee/list">사원정보</a></li>
+		
+		<li class="nav-item"><a class="nav-link active"
+			aria-current="page" href="/employee/list">사원정보</a></li>
 	</ul>
-	<!-- <a href="/department/list">부서정보</a>
-	<a href="/location/list">지역정보</a>
-	<a href="/employee/list">사원정보</a> -->
-
-
-	<br>
-	<br>
-	<div class="container">
+	
+	<div class="container text-center">
 		<div class="row justify-content-center">
-			<div>
-				<h1 class="text-center">Spring-DB 실습 INDEX PAGE</h1>
-				<br>
-				<img alt="breaching killer whale" class="rounded mx-auto d-block" src="/resources/images/anim5.png">
+			<div class="col-lg-7 col-md-9">
+				<table class="table table-primary table-striped table-hover">
+					<thead>
+						<tr>
+							<th>사원번호</th>
+							<th>이름</th>
+							<th>성</th>
+							<th>직무</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<c:forEach items="${requestScope.list}" var="dto">
+							<tr>
+								<td>${pageScope.dto.employee_id}</td>
+								<td>${pageScope.dto.first_name}</td>
+								<td>${pageScope.dto.last_name}</td>
+								<td>${pageScope.dto.job_id}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
+
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LOCATION LIST</title>
+<title>LOCATIONS LIST</title>
 
 
 
@@ -19,33 +19,46 @@
 
 
 <body>
-	<h1>지역정보</h1>
-	<div>
-		<table class="table table-dark table-striped table-hover">
-			<thead>
-				<tr>
-					<th>지역번호</th>
-					<th>도로명주소</th>
-					<th>우편번호</th>
-					<th>도시</th>
-					<th>주</th>
-					<th>국가코드</th>
-				</tr>
-			</thead>
+	<ul class="nav justify-content-center nav-tabs nav-pills">
+		<li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+		<li class="nav-item"><a class="nav-link" href="/department/list">부서정보</a></li>
+		
+		<li class="nav-item"><a class="nav-link active"
+			aria-current="page" href="/location/list">지역정보</a></li>
+			
+		<li class="nav-item"><a class="nav-link" href="/employee/list">사원정보</a></li>
+	</ul>
+	
+	<div class="container text-center">
+		<div class="row justify-content-center">
+			<div class="col-lg-10">
+				<table class="table table-primary table-striped table-hover">
+					<thead>
+						<tr>
+							<th>지역번호</th>
+							<th>도로명주소</th>
+							<th>우편번호</th>
+							<th>도시</th>
+							<th>주</th>
+							<th>국가코드</th>
+						</tr>
+					</thead>
 
-			<tbody>
-				<c:forEach items="${requestScope.list}" var="dto">
-					<tr>
-						<td>${pageScope.dto.location_id}</td>
-						<td>${pageScope.dto.street_address}</td>
-						<td>${pageScope.dto.postal_code}</td>
-						<td>${pageScope.dto.city}</td>
-						<td>${pageScope.dto.state_province}</td>
-						<td>${pageScope.dto.country_id}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+					<tbody>
+						<c:forEach items="${requestScope.list}" var="dto">
+							<tr>
+								<td>${pageScope.dto.location_id}</td>
+								<td>${pageScope.dto.street_address}</td>
+								<td>${pageScope.dto.postal_code}</td>
+								<td>${pageScope.dto.city}</td>
+								<td>${pageScope.dto.state_province}</td>
+								<td>${pageScope.dto.country_id}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 
 

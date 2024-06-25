@@ -19,27 +19,40 @@
 
 
 <body>
-	<h1>부서목록</h1>
-	<div>
-		<table class="table table-dark table-striped table-hover">
-			<thead>
-				<tr>
-					<th>부서번호</th>
-					<th>부서명</th>
-					<th>관리자ID</th>
-				</tr>
-			</thead>
+	<ul class="nav justify-content-center nav-tabs nav-pills">
+		<li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+		
+		<li class="nav-item"><a class="nav-link active"
+			aria-current="page" href="/department/list">부서정보</a></li>
 
-			<tbody>
-				<c:forEach items="${requestScope.list}" var="dto">
-					<tr>
-						<td>${pageScope.dto.department_id}</td>
-						<td>${pageScope.dto.department_name}</td>
-						<td>${pageScope.dto.manager_id}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<li class="nav-item"><a class="nav-link" href="/location/list">지역정보</a></li>
+		<li class="nav-item"><a class="nav-link" href="/employee/list">사원정보</a></li>
+	</ul>
+
+	<div class="container text-center">
+		<div class="row justify-content-center">
+			<div class="col-lg-7 col-md-9">
+				<table class="table table-primary table-striped table-hover">
+					<thead>
+						<tr>
+							<th>부서번호</th>
+							<th>부서명</th>
+							<th>관리자ID</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<c:forEach items="${requestScope.list}" var="dto">
+							<tr>
+								<td>${pageScope.dto.department_id}</td>
+								<td>${pageScope.dto.department_name}</td>
+								<td>${pageScope.dto.manager_id}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 
 
