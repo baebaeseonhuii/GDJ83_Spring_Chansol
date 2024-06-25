@@ -28,6 +28,8 @@
 		<li class="nav-item"><a class="nav-link" href="/location/list">지역정보</a></li>
 		<li class="nav-item"><a class="nav-link" href="/employee/list">사원정보</a></li>
 	</ul>
+	
+	<br>
 
 	<div class="container text-center">
 		<div class="row justify-content-center">

@@ -25,9 +25,8 @@
 	<a href="/location/list">지역정보</a>
 	<a href="/employee/list">사원정보</a> -->
 
-
 	<br>
-	<br>
+	
 	<div class="container">
 		<div class="row justify-content-center">
 			<div>

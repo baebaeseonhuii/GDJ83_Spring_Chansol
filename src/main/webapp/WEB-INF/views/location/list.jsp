@@ -22,12 +22,14 @@
 	<ul class="nav justify-content-center nav-tabs nav-pills">
 		<li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
 		<li class="nav-item"><a class="nav-link" href="/department/list">부서정보</a></li>
-		
+
 		<li class="nav-item"><a class="nav-link active"
 			aria-current="page" href="/location/list">지역정보</a></li>
-			
+
 		<li class="nav-item"><a class="nav-link" href="/employee/list">사원정보</a></li>
 	</ul>
+	
+	<br>
 	
 	<div class="container text-center">
 		<div class="row justify-content-center">
