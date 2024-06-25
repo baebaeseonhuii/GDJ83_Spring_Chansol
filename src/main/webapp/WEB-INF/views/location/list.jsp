@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DEPARTMENT LIST</title>
+<title>LOCATION LIST</title>
 
 
 
@@ -19,23 +19,29 @@
 
 
 <body>
-	<h1>부서목록</h1>
+	<h1>지역정보</h1>
 	<div>
 		<table class="table table-dark table-striped table-hover">
 			<thead>
 				<tr>
-					<th>부서번호</th>
-					<th>부서명</th>
-					<th>관리자ID</th>
+					<th>지역번호</th>
+					<th>도로명주소</th>
+					<th>우편번호</th>
+					<th>도시</th>
+					<th>주</th>
+					<th>국가코드</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<c:forEach items="${requestScope.list}" var="dto">
 					<tr>
-						<td>${pageScope.dto.department_id}</td>
-						<td>${pageScope.dto.department_name}</td>
-						<td>${pageScope.dto.manager_id}</td>
+						<td>${pageScope.dto.location_id}</td>
+						<td>${pageScope.dto.street_address}</td>
+						<td>${pageScope.dto.postal_code}</td>
+						<td>${pageScope.dto.city}</td>
+						<td>${pageScope.dto.state_province}</td>
+						<td>${pageScope.dto.country_id}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

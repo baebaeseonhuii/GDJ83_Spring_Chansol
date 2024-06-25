@@ -9,5 +9,6 @@
 <body>
 	<h1>HOME</h1>
 	<a href="/department/list">부서목록</a>
+	<a href="/location/list">지역정보</a>
 </body>
 </html>
