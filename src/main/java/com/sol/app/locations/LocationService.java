@@ -15,4 +15,13 @@ public class LocationService {
 	public List<LocationDTO> getList() throws Exception {
 		return locationDAO.getList();
 	}
+	
+	public LocationDTO getDetail(Integer num) throws Exception {
+		LocationDTO locationDTO = locationDAO.getDetail(num);
+		return locationDTO;
+	}
+	
+	public int add(LocationDTO locationDTO) throws Exception {
+		return locationDAO.add(locationDTO);
+	}
 }

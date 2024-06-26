@@ -8,16 +8,60 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sol.app.locations.LocationDTO;
+
 @Controller
 @RequestMapping("/employee/*")
 public class EmployeeController {
-	
+
 	@Autowired
 	private EmployeeService employeeService;
-	
-	@RequestMapping(value="list", method=RequestMethod.GET)
+
+	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList(Model model) throws Exception {
 		List<EmployeeDTO> list = employeeService.getList();
 		model.addAttribute("list", list);
+	}
+
+	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	public String getDetail(Model model, Long employee_id) throws Exception {
+		EmployeeDTO employeeDTO = employeeService.getDetail(employee_id);
+
+		String path = "/commons/message";
+
+		if (employeeDTO != null) {
+			model.addAttribute("dto", employeeDTO);
+			path = "/employee/detail";
+
+		} else {
+			model.addAttribute("result", "사원을 찾을 수 없습니다");
+			model.addAttribute("url", "./list");
+
+		}
+
+		return path;
+
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public void add() throws Exception {
+
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String add(Model model, EmployeeDTO EmployeeDTO) throws Exception {
+		int result = employeeService.add(EmployeeDTO);
+
+		String url = "";
+		if (result > 0) {
+			url = "redirect:./list";
+
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "사원 등록 실패");
+			model.addAttribute("url", "./list");
+
+		}
+		return url;
 	}
 }

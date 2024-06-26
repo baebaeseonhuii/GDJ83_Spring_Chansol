@@ -11,9 +11,9 @@ public class EmployeeDTO {
 	private Date hire_date;
 	private String job_id;
 	private Double salary;
-	private Double commision_pct;
+	private Double commission_pct;
 	private Long manager_id;
-	private Long department_id;
+	private Integer department_id;
 	
 	public Long getEmployee_id() {
 		return employee_id;
@@ -63,11 +63,11 @@ public class EmployeeDTO {
 	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
-	public Double getCommision_pct() {
-		return commision_pct;
+	public Double getCommission_pct() {
+		return commission_pct;
 	}
-	public void setCommision_pct(Double commision_pct) {
-		this.commision_pct = commision_pct;
+	public void setCommission_pct(Double commission_pct) {
+		this.commission_pct = commission_pct;
 	}
 	public Long getManager_id() {
 		return manager_id;
@@ -75,10 +75,10 @@ public class EmployeeDTO {
 	public void setManager_id(Long manager_id) {
 		this.manager_id = manager_id;
 	}
-	public Long getDepartment_id() {
+	public Integer getDepartment_id() {
 		return department_id;
 	}
-	public void setDepartment_id(Long department_id) {
+	public void setDepartment_id(Integer department_id) {
 		this.department_id = department_id;
 	}
 

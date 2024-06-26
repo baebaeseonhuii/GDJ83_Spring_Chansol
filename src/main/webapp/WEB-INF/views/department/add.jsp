@@ -1,59 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LOCATIONS LIST</title>
-
-
-
+<title>ADD DEPARTMENT</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
 </head>
-
-
 <body>
   <ul class="nav justify-content-center nav-tabs nav-pills">
     <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
-    <li class="nav-item"><a class="nav-link" href="/department/list">부서정보</a></li>
 
-    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/location/list">지역정보</a></li>
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/department/list">부서정보</a></li>
 
+    <li class="nav-item"><a class="nav-link" href="/location/list">지역정보</a></li>
     <li class="nav-item"><a class="nav-link" href="/employee/list">사원정보</a></li>
   </ul>
 
   <br>
 
-  <div class="container text-center">
+
+
+  <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-7 col-md-9">
-
-        <div class="d-md-flex justify-content-md-end">
-          <a class="btn btn-primary justify-content-end" href="./add" role="button">지역등록</a>
-        </div>
-
-        <br>
-
-        <table class="table table-primary table-striped table-hover">
-          <thead>
-            <tr>
-              <th>지역번호</th>
-              <th>도로명주소</th>
-              <th>도시</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <c:forEach items="${requestScope.list}" var="dto">
-              <tr>
-                <td>${dto.location_id}</td>
-                <td><a href="./detail?location_id=${dto.location_id}">${dto.street_address}</a></td>
-                <td>${dto.city}</td>
-              </tr>
-            </c:forEach>
-          </tbody>
-        </table>
+        <form action="./add" method="post">
+          <div class="mb-3">
+            <label for="department_name" class="form-label">부서명</label> <input type="text" class="form-control" id="department_name" name="department_name">
+          </div>
+          <div class="mb-3">
+            <label for="manager_id" class="form-label">관리자번호</label> <input type="text" class="form-control" id="manager_id" name="manager_id">
+          </div>
+          <div class="mb-3">
+            <label for="location_id" class="form-label">지역번호</label> <input type="text" class="form-control" id="location_id" name="location_id">
+          </div>
+          <button type="submit" class="btn btn-primary">등록</button>
+        </form>
       </div>
     </div>
   </div>
