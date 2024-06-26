@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sol.app.departments.DepartmentDTO;
+
 @Controller
 @RequestMapping("/location/*")
 public class LocationController {
@@ -63,5 +65,64 @@ public class LocationController {
 		
 		return url;
 			
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(Model model, LocationDTO locationDTO) throws Exception {
+		int result = locationService.delete(locationDTO);
+
+		String url = "";
+
+		if (result > 0) {
+			url = "redirect:./list";
+			
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "부서 삭제 실패");
+			model.addAttribute("url", "./list");
+			
+		}
+		
+		return url;
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String update(Model model ,Integer location_id) throws Exception {
+		LocationDTO locationDTO = locationService.getDetail(location_id);
+		
+		String url = "";
+		
+		if(locationDTO != null) {
+			url = "/location/update";
+			model.addAttribute("dto", locationDTO);
+			
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "존재하지 않는 부서입니다");
+			model.addAttribute("url", "./list");
+			
+		}
+		
+		return url;
+		
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String update(Model model, LocationDTO locationDTO) throws Exception {
+		int result = locationService.update(locationDTO);
+		
+		String url = "";
+		
+		if(result > 0) {
+			url="redirect:./list";
+			
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "부서 수정 실패");
+			model.addAttribute("url", "./list");
+			
+		}
+		
+		return url;
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sol.app.locations.LocationDTO;
+import com.sol.app.locations.LocationService;
 
 @Controller
 @RequestMapping("/employee/*")
@@ -62,6 +63,65 @@ public class EmployeeController {
 			model.addAttribute("url", "./list");
 
 		}
+		return url;
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(Model model, EmployeeDTO employeeDTO) throws Exception {
+		int result = employeeService.delete(employeeDTO);
+
+		String url = "";
+
+		if (result > 0) {
+			url = "redirect:./list";
+			
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "부서 삭제 실패");
+			model.addAttribute("url", "./list");
+			
+		}
+		
+		return url;
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String update(Model model ,Long employee_id) throws Exception {
+		EmployeeDTO employeeDTO = employeeService.getDetail(employee_id);
+		
+		String url = "";
+		
+		if(employeeDTO != null) {
+			url = "/employee/update";
+			model.addAttribute("dto", employeeDTO);
+			
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "존재하지 않는 사원입니다");
+			model.addAttribute("url", "./list");
+			
+		}
+		
+		return url;
+		
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String update(Model model, EmployeeDTO employeeDTO) throws Exception {
+		int result = employeeService.update(employeeDTO);
+		
+		String url = "";
+		
+		if(result > 0) {
+			url="redirect:./list";
+			
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "사원정보 수정 실패");
+			model.addAttribute("url", "./list");
+			
+		}
+		
 		return url;
 	}
 }

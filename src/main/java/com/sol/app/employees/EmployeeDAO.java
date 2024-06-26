@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.sol.app.departments.DepartmentDTO;
 import com.sol.app.util.DBConnection;
 
 @Repository
@@ -95,6 +96,53 @@ public class EmployeeDAO {
 
 		int result = pst.executeUpdate();
 
+		return result;
+	}
+	
+	public int delete(EmployeeDTO employeeDTO) throws Exception {
+		Connection con = dbConnection.getConnection();
+
+		String sql = "DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID=?";
+
+		PreparedStatement pst = con.prepareStatement(sql);
+
+		pst.setLong(1, employeeDTO.getEmployee_id());
+
+		int result = pst.executeUpdate();
+
+		pst.close();
+		con.close();
+
+		return result;
+	}
+
+	public int update(EmployeeDTO employeeDTO) throws Exception {
+		Connection con = dbConnection.getConnection();
+		
+		String sql = "UPDATE EMPLOYEES SET " + "FIRST_NAME=?, LAST_NAME=?, EMAIL=?, PHONE_NUMBER=?, HIRE_DATE=?, "
+				+ "JOB_ID=?, SALARY=?, COMMISSION_PCT=?, MANAGER_ID=?, DEPARTMENT_ID=? "
+				+ "WHERE EMPLOYEE_ID=?";
+
+		
+		PreparedStatement pst = con.prepareStatement(sql);
+		
+		pst.setString(1, employeeDTO.getFirst_name());
+		pst.setString(2, employeeDTO.getLast_name());
+		pst.setString(3, employeeDTO.getEmail());
+		pst.setString(4, employeeDTO.getPhone_number());
+		pst.setDate(5, employeeDTO.getHire_date());
+		pst.setString(6, employeeDTO.getJob_id());
+		pst.setDouble(7, employeeDTO.getSalary());
+		pst.setDouble(8, employeeDTO.getCommission_pct());
+		pst.setLong(9, employeeDTO.getManager_id());
+		pst.setInt(10, employeeDTO.getDepartment_id());
+		pst.setLong(11, employeeDTO.getEmployee_id());
+		
+		int result = pst.executeUpdate();
+		
+		pst.close();
+		con.close();
+		
 		return result;
 	}
 }

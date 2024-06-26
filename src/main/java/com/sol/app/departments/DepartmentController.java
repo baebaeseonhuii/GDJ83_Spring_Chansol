@@ -63,6 +63,65 @@ public class DepartmentController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String add(Model model, DepartmentDTO departmentDTO) throws Exception {
 		int result = departmentService.add(departmentDTO);
+
+		String url = "";
+
+		if (result > 0) {
+			url = "redirect:./list";
+
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "부서 등록 실패");
+			model.addAttribute("url", "./list");
+
+		}
+
+		return url;
+	}
+
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(Model model, DepartmentDTO departmentDTO) throws Exception {
+		int result = departmentService.delete(departmentDTO);
+
+		String url = "";
+
+		if (result > 0) {
+			url = "redirect:./list";
+			
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "부서 삭제 실패");
+			model.addAttribute("url", "./list");
+			
+		}
+		
+		return url;
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String update(Model model ,Integer department_id) throws Exception {
+		DepartmentDTO departmentDTO = departmentService.getDetail(department_id);
+		
+		String url = "";
+		
+		if(departmentDTO != null) {
+			url = "/department/update";
+			model.addAttribute("dto", departmentDTO);
+			
+		} else {
+			url = "/commons/message";
+			model.addAttribute("result", "존재하지 않는 부서입니다");
+			model.addAttribute("url", "./list");
+			
+		}
+		
+		return url;
+		
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String update(Model model, DepartmentDTO departmentDTO) throws Exception {
+		int result = departmentService.update(departmentDTO);
 		
 		String url = "";
 		
@@ -71,7 +130,7 @@ public class DepartmentController {
 			
 		} else {
 			url = "/commons/message";
-			model.addAttribute("result", "부서 등록 실패");
+			model.addAttribute("result", "부서 수정 실패");
 			model.addAttribute("url", "./list");
 			
 		}

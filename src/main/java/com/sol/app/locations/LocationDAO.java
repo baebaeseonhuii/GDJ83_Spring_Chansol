@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sol.app.departments.DepartmentDTO;
 import com.sol.app.util.DBConnection;
 
 @Repository
@@ -93,6 +94,49 @@ public class LocationDAO {
 
 		int result = pst.executeUpdate();
 
+		return result;
+	}
+	
+
+	public int delete(LocationDTO locationDTO) throws Exception {
+		Connection con = dbConnection.getConnection();
+
+		String sql = "DELETE FROM LOCATIONS WHERE LOCATION_ID=?";
+
+		PreparedStatement pst = con.prepareStatement(sql);
+
+		pst.setInt(1, locationDTO.getLocation_id());
+
+		int result = pst.executeUpdate();
+
+		pst.close();
+		con.close();
+
+		return result;
+	}
+
+	public int update(LocationDTO locationDTO) throws Exception {
+		Connection con = dbConnection.getConnection();
+		
+		String sql = "UPDATE LOCATIONS "
+				+ "SET STREET_ADDRESS=?, POSTAL_CODE=?, CITY=?, "
+				+ "STATE_PROVINCE=?, COUNTRY_ID=?"
+				+ "WHERE LOCATION_ID=?";
+		
+		PreparedStatement pst = con.prepareStatement(sql);
+		
+		pst.setString(1, locationDTO.getStreet_address());
+		pst.setString(2, locationDTO.getPostal_code());
+		pst.setString(3, locationDTO.getCity());
+		pst.setString(4, locationDTO.getState_province());
+		pst.setString(5, locationDTO.getCountry_id());
+		pst.setInt(6, locationDTO.getLocation_id());
+		
+		int result = pst.executeUpdate();
+		
+		pst.close();
+		con.close();
+		
 		return result;
 	}
 }
