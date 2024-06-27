@@ -25,6 +25,12 @@
 
   <br>
 
+  <div class="row">
+    <h3>부서번호 급여합계 급여평균</h3>
+    <c:forEach items="${info}" var="m">
+      <h3>${m.id} ${m.sum} ${m.avg}</h3>
+    </c:forEach>
+  </div>
 
   <div class="container text-center">
     <div class="row justify-content-center">

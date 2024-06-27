@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -156,6 +158,53 @@ public class DepartmentDAO {
 		con.close();
 		
 		return result;
+	}
+	
+	// 부서별 정보 조회
+	public List<Map<String, Object>> getInfo () throws Exception {
+		Connection con = dbConnection.getConnection();
+		
+		String sql = "SELECT DEPARTMENT_ID, SUM(SALARY), AVG(SALARY) "
+				+ "FROM EMPLOYEES "
+				+ "GROUP BY DEPARTMENT_ID";
+		
+		PreparedStatement pst = con.prepareStatement(sql);
+		
+		ResultSet rs = pst.executeQuery();
+		
+		StringBuilder sb = new StringBuilder();
+		
+//		sb.append("DEPARTMENT_ID\tSUM(SALARY)\tAVG(SALARY)");
+		
+		List<Map<String, Object>> ar = new ArrayList<Map<String,Object>>();
+		
+		while(rs.next()) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			Integer id = (rs.getInt("DEPARTMENT_ID"));
+			Integer sum = (rs.getInt("SUM(SALARY)"));
+			Double avg = (rs.getDouble("AVG(SALARY)"));
+			
+			map.put("id", id);
+			map.put("sum", sum);
+			map.put("avg", avg);
+			
+			ar.add(map);
+		}
+		
+//		while(rs.next()) {
+//			sb.append(rs.getInt("DEPARTMENT_ID")).append("\t")
+//			.append(rs.getInt("SUM(SALARY)")).append("\t")
+//			.append(rs.getDouble("AVG(SALARY)")).append("\n");
+//		}
+		
+//		System.out.println(sb);
+		
+		rs.close();
+		pst.close();
+		con.close();
+		
+		return ar;
 	}
 
 }

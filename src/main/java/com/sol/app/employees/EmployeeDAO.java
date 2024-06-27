@@ -119,7 +119,7 @@ public class EmployeeDAO {
 	public int update(EmployeeDTO employeeDTO) throws Exception {
 		Connection con = dbConnection.getConnection();
 		
-		String sql = "UPDATE EMPLOYEES SET " + "FIRST_NAME=?, LAST_NAME=?, EMAIL=?, PHONE_NUMBER=?, HIRE_DATE=?, "
+		String sql = "UPDATE EMPLOYEES SET " + "FIRST_NAME=?, LAST_NAME=?, EMAIL=?, PHONE_NUMBER=?, "
 				+ "JOB_ID=?, SALARY=?, COMMISSION_PCT=?, MANAGER_ID=?, DEPARTMENT_ID=? "
 				+ "WHERE EMPLOYEE_ID=?";
 
@@ -130,13 +130,13 @@ public class EmployeeDAO {
 		pst.setString(2, employeeDTO.getLast_name());
 		pst.setString(3, employeeDTO.getEmail());
 		pst.setString(4, employeeDTO.getPhone_number());
-		pst.setDate(5, employeeDTO.getHire_date());
-		pst.setString(6, employeeDTO.getJob_id());
-		pst.setDouble(7, employeeDTO.getSalary());
-		pst.setDouble(8, employeeDTO.getCommission_pct());
-		pst.setLong(9, employeeDTO.getManager_id());
-		pst.setInt(10, employeeDTO.getDepartment_id());
-		pst.setLong(11, employeeDTO.getEmployee_id());
+//		pst.setDate(5, employeeDTO.getHire_date());
+		pst.setString(5, employeeDTO.getJob_id());
+		pst.setDouble(6, employeeDTO.getSalary());
+		pst.setDouble(7, employeeDTO.getCommission_pct());
+		pst.setLong(8, employeeDTO.getManager_id());
+		pst.setInt(9, employeeDTO.getDepartment_id());
+		pst.setLong(10, employeeDTO.getEmployee_id());
 		
 		int result = pst.executeUpdate();
 		

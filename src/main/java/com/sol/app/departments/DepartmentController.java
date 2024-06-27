@@ -1,8 +1,7 @@
 package com.sol.app.departments;
 
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,14 +23,15 @@ public class DepartmentController {
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getlist(Model model) throws Exception {
-		List<DepartmentDTO> ar = departmentService.getList();
-
+		List<DepartmentDTO> list = departmentService.getList();
+		List<Map<String, Object>> info = departmentService.getInfo();
+		
 //		Model + View
 //		mv.addObject("list", ar);
 //		mv.setViewName("department/list");
 
-		model.addAttribute("list", ar);
-
+		model.addAttribute("list", list);
+		model.addAttribute("info", info);
 	}
 
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
