@@ -1,52 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>HOME</title>
-
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
+<c:import url="/WEB-INF/views/sample/bootHeader.jsp"></c:import>
 </head>
 <body>
-	<ul class="nav justify-content-center nav-tabs nav-pills">
-		<li class="nav-item"><a class="nav-link active"
-			aria-current="page" href="/">HOME</a></li>
-		<li class="nav-item"><a class="nav-link" href="/department/list">부서정보</a></li>
-		<li class="nav-item"><a class="nav-link" href="/location/list">지역정보</a></li>
-		<li class="nav-item"><a class="nav-link" href="/employee/list">사원정보</a></li>
-	</ul>
-	<!-- <a href="/department/list">부서정보</a>
-	<a href="/location/list">지역정보</a>
-	<a href="/employee/list">사원정보</a> -->
+  <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-7 col-md-9">
+        <div id="carouselExampleIndicators" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="/resources/images/bird-8788491_1920.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="/resources/images/ai-generated-8327632_1920.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="/resources/images/squirrel-8536537_1920.jpg" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<br>
-	
-	<div class="container">
-		<div class="row justify-content-center">
-			<div>
-				<h1 class="text-center">Spring-DB 실습 INDEX PAGE</h1>
-				<br>
-				<img alt="breaching killer whale" class="rounded mx-auto d-block" src="/resources/images/anim5.png">
-			</div>
-		</div>
-	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-		crossorigin="anonymous"></script>
+  <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
 </body>
 </html>
