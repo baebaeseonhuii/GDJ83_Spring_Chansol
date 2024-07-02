@@ -20,7 +20,7 @@ public class ItemDAO {
 	public List<ItemDTO> getList() throws Exception {
 		Connection con = dbConnection.getConnection();
 		
-		String sql = "SELECT * FROM ITEMS ORDER BY ITEM_ID ASC";
+		String sql = "SELECT * FROM ITEMS ORDER BY ITEM_ID DESC";
 		
 		PreparedStatement pst = con.prepareStatement(sql);
 		
