@@ -20,13 +20,13 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="/resources/images/bird-8788491_1920.jpg" class="d-block w-100" alt="...">
+              <img src="/resources/images/index/bird-8788491_1920.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-              <img src="/resources/images/ai-generated-8327632_1920.jpg" class="d-block w-100" alt="...">
+              <img src="/resources/images/index/ai-generated-8327632_1920.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-              <img src="/resources/images/squirrel-8536537_1920.jpg" class="d-block w-100" alt="...">
+              <img src="/resources/images/index/squirrel-8536537_1920.jpg" class="d-block w-100" alt="...">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
