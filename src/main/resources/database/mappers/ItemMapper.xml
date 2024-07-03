@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper는 테이블 별로 하나씩 만들 거다. namespace는 중복되면 안됨 -->
+<!-- 따라서 namespace의 이름은 DAO가 존재하는 패키지의 명을 포함하여 작성해줌 -->
+<mapper namespace="com.sol.app.product.ItemDAO">
+	
+	<select id="getList" resultType="com.sol.app.product.ItemDTO">
+		SELECT * FROM ITEMS ORDER BY ITEM_ID DESC
+	</select>
+	
+	<select id="getDetail" resultType="com.sol.app.product.ItemDTO" parameterType="com.sol.app.product.ItemDTO">
+		SELECT * FROM ITEMS WHERE ITEM_ID = #{item_id}
+	</select>
+	
+	<insert id="add" parameterType="com.sol.app.product.ItemDTO">
+		INSERT INTO ITEMS VALUES(ITEMS_SEQ.NEXTVAL, #{item_name} ,#{item_detail} ,#{item_rate})
+	</insert>
+	
+	<delete id="delete" parameterType="com.sol.app.product.ItemDTO">
+		DELETE ITEMS WHERE ITEM_ID = #{item_id}
+	</delete>
+	
+	<update id="update">
+		UPDATE ITEMS SET ITEM_NAME = #{item_name}, ITEM_DETAIL = #{item_detail}, ITEM_RATE = #{item_rate} WHERE ITEM_ID = #{item_id} 
+	</update>
+	
+</mapper>

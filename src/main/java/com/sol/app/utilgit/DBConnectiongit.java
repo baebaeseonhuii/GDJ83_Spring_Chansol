@@ -3,7 +3,7 @@ package com.sol.app.utilgit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DBConnection {
+public class DBConnectiongit {
 	
 	public Connection getConnection() throws Exception {
 		String username = "";
