@@ -12,6 +12,13 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
       <div class="col-lg-7 col-md-9">
+
+        <c:if test="${not empty sessionScope.member}">
+          <div>
+            <h3>${sessionScope.member.member_name}님 환영합니다</h3>
+          </div>
+        </c:if>
+
         <div id="carouselExampleIndicators" class="carousel slide">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

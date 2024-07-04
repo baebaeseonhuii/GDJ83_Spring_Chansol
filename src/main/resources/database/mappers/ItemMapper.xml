@@ -7,24 +7,29 @@
 <!-- 따라서 namespace의 이름은 DAO가 존재하는 패키지의 명을 포함하여 작성해줌 -->
 <mapper namespace="com.sol.app.product.ItemDAO">
 	
-	<select id="getList" resultType="com.sol.app.product.ItemDTO">
+	<select id="getList" resultType="ItemDTO">
 		SELECT * FROM ITEMS ORDER BY ITEM_ID DESC
 	</select>
 	
-	<select id="getDetail" resultType="com.sol.app.product.ItemDTO" parameterType="com.sol.app.product.ItemDTO">
+	<select id="getDetail" resultType="ItemDTO" parameterType="ItemDTO">
 		SELECT * FROM ITEMS WHERE ITEM_ID = #{item_id}
 	</select>
 	
-	<insert id="add" parameterType="com.sol.app.product.ItemDTO">
-		INSERT INTO ITEMS VALUES(ITEMS_SEQ.NEXTVAL, #{item_name} ,#{item_detail} ,#{item_rate})
+	<insert id="add" parameterType="ItemDTO">
+		INSERT INTO ITEMS
+		VALUES(ITEMS_SEQ.NEXTVAL, #{item_name} ,#{item_detail} ,#{item_rate})
 	</insert>
 	
-	<delete id="delete" parameterType="com.sol.app.product.ItemDTO">
+	<delete id="delete" parameterType="ItemDTO">
 		DELETE ITEMS WHERE ITEM_ID = #{item_id}
 	</delete>
 	
-	<update id="update">
-		UPDATE ITEMS SET ITEM_NAME = #{item_name}, ITEM_DETAIL = #{item_detail}, ITEM_RATE = #{item_rate} WHERE ITEM_ID = #{item_id} 
+	<update id="update" parameterType="ItemDTO">
+		UPDATE ITEMS SET
+			ITEM_NAME = #{item_name}
+		,	ITEM_DETAIL = #{item_detail}
+		,	ITEM_RATE = #{item_rate}
+		WHERE ITEM_ID = #{item_id} 
 	</update>
 	
 </mapper>
