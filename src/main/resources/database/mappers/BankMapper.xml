@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.sol.app.accounts.AccountDAO">
+  
+  	<insert id="add" parameterType="AccountDTO">
+  		INSERT INTO BANK (BANK_ID, MEMBER_ID, ITEM_ID, BANK_PW, BALANCE)
+  		VALUES(
+  			LPAD(TO_CHAR(#{item_id}), 7, '0') || LPAD(TO_CHAR(BANKID_SEQ.NEXTVAL), 13, '0'),
+  			#{member_id},
+  			#{item_id},
+  			#{bank_pw},
+  			#{balance}
+  			)
+  	</insert>
+  	
+  </mapper>

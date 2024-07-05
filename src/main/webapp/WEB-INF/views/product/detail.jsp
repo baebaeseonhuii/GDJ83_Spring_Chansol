@@ -13,6 +13,9 @@
     <div class="row justify-content-center mt-5">
       <div class="col-lg-7 col-md-9">
         <div class="d-md-flex justify-content-md-end">
+          <c:if test="${not empty member}">
+            <a class="btn btn-primary justify-content-end me-2" href="/accounts/add?item_id=${dto.item_id}" role="button">상품가입</a>
+          </c:if>
           <a class="btn btn-primary justify-content-end me-2" href="./update?item_id=${dto.item_id}" role="button">수정</a>
           <a class="btn btn-primary justify-content-end" href="./delete?item_id=${dto.item_id}" role="button">삭제</a>
         </div>

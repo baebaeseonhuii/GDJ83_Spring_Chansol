@@ -8,7 +8,7 @@
       <li class="nav-item"><a class="nav-link" href="/members/login">로그인</a></li>
     </c:when>
     <c:otherwise>
-      <li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+      <li class="nav-item"><a class="nav-link" href="/members/mypage">마이페이지</a></li>
       <li class="nav-item"><a class="nav-link" href="/members/logout">로그아웃</a></li>
     </c:otherwise>
   </c:choose>

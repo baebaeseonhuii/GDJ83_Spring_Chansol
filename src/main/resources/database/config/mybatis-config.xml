@@ -7,5 +7,6 @@
  	<typeAliases>
  		<typeAlias type="com.sol.app.product.ItemDTO" alias="ItemDTO"/>
  		<typeAlias type="com.sol.app.members.MemberDTO" alias="MemberDTO"/>
+ 		<typeAlias type="com.sol.app.accounts.AccountDTO" alias="AccountDTO"/>
  	</typeAliases>
  </configuration>

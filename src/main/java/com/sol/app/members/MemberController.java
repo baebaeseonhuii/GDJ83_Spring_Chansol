@@ -66,8 +66,52 @@ public class MemberController {
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(HttpSession httpSession) throws Exception {
 		httpSession.setAttribute("member", null);
-		//httpSession.invalidate();
+//		httpSession.invalidate();
+//		httpSession.removeAttribute("member");
+//		httpSession.removeValue("member");
+//		httpSession.isNew();
 		return "redirect:/";
 	}
+
+	@RequestMapping(value = "mypage", method = RequestMethod.GET)
+	public void mypage(HttpSession httpSession, Model model) throws Exception {
+		MemberDTO dto = (MemberDTO) httpSession.getAttribute("member");
+		dto = memberService.login(dto);
+		model.addAttribute("member", dto);
+	}
+
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public void update(HttpSession httpSession, Model model) throws Exception {
+		MemberDTO dto = (MemberDTO) httpSession.getAttribute("member");
+		dto = memberService.login(dto);
+		model.addAttribute("member", dto);
+	}
+
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String update(HttpSession httpSession, MemberDTO dto) throws Exception {
+		MemberDTO dtoTmp = (MemberDTO) httpSession.getAttribute("member");
+		dto.setMember_pw(dtoTmp.getMember_pw());
+		dto.setMember_id(dtoTmp.getMember_id());
+
+		int num = memberService.update(dto);
+
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	public String delete(Model model, HttpSession httpSession) throws Exception {
+		MemberDTO dto = (MemberDTO)httpSession.getAttribute("member");
+		int num = memberService.delete(dto);
+		if(num > 0) {
+			model.addAttribute("result", "계정이 삭제되었습니다.");
+			model.addAttribute("url", "/");			
+			httpSession.setAttribute("member", null);
+		} else {
+			model.addAttribute("result", "계정이 삭제실패.");
+			model.addAttribute("url", "/");
+		}
+		return "/commons/message";
+	}
+
 
 }
