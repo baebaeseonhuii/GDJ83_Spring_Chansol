@@ -18,17 +18,23 @@
         </div>
         <form action="./delete" method="post" id="frm"></form>
           <div class="col-md-12">
-            <label for="member_id" class="form-label">ID</label> <input type="text" class="form-control" name="member_id" id="member_id" value="${member.member_id}" readonly>
+            <label for="member_id" class="form-label">ID</label> <input type="text" class="form-control" name="member_id" id="member_id" value="${member.member.member_id}" readonly>
           </div>
 
         <div class="col-md-12 mt-2">
-          <label for="member_name" class="form-label">FULL NAME</label> <input type="text" class="form-control" name="member_name" id="member_name" value="${member.member_name}" readonly>
+          <label for="member_name" class="form-label">FULL NAME</label> <input type="text" class="form-control" name="member_name" id="member_name" value="${member.member.member_name}" readonly>
         </div>
         <div class="col-md-12 mt-2">
-          <label for="member_phone" class="form-label">PHONE NUMBER</label> <input type="text" class="form-control" name="member_phone" id="member_phone" value="${member.member_phone}" readonly>
+          <label for="member_phone" class="form-label">PHONE NUMBER</label> <input type="text" class="form-control" name="member_phone" id="member_phone" value="${member.member.member_phone}" readonly>
         </div>
         <div class="col-md-12 mt-2">
-          <label for="member_email" class="form-label">EMAIL</label> <input type="email" class="form-control" name="member_email" id="member_email" value="${member.member_email}" readonly>
+          <label for="member_email" class="form-label">EMAIL</label> <input type="email" class="form-control" name="member_email" id="member_email" value="${member.member.member_email}" readonly>
+        </div>
+        <div class="col-md-12 mt-2">
+          <h3>계좌정보</h3>
+          <c:forEach items="${member.accounts}" var="ac">
+            <h3>${ac.bank_id} : ${ac.balance}</h3>
+          </c:forEach>
         </div>
 
 
@@ -37,14 +43,14 @@
   </div>
   
   <script>
-  	const delbtn = document.getElementById("delbtn");
-  	const frm = document.getElementById("frm");
-  	delbtn.addEventListener("click", function(){
-  		let result = prompt("정말 삭제하시려면 \"삭제\"를 입력하세요.");
-  		if(result == "삭제"){
-  			frm.submit();
-  		}
-  	})
+    const delbtn = document.getElementById("delbtn");
+    const frm = document.getElementById("frm");
+    delbtn.addEventListener("click", function(){
+      let result = prompt("정말 삭제하시려면 \"삭제\"를 입력하세요.");
+      if(result == "삭제"){
+        frm.submit();
+      }
+    })
   </script>
 
   <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>

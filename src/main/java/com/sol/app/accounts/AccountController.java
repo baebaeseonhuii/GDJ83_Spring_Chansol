@@ -44,4 +44,9 @@ public class AccountController {
 		
 		return "/commons/messages";
 	}
+	
+	@RequestMapping(value="list", method=RequestMethod.GET)
+	public void getList() throws Exception {
+		
+	}
 }

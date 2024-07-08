@@ -1,7 +1,8 @@
 package com.sol.app.members;
 
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -51,9 +52,11 @@ public class MemberController {
 			response.addCookie(cookie);
 		}
 
-		dto = memberService.login(dto);
-		if (dto != null) {
-			httpSession.setAttribute("member", dto);
+		Map<String, Object> map = memberService.login(dto);
+		
+		
+		if (map != null) {
+			httpSession.setAttribute("member", map);
 			model.addAttribute("url", "/");
 			model.addAttribute("result", "로그인 성공");
 		} else {
@@ -75,16 +78,17 @@ public class MemberController {
 
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)
 	public void mypage(HttpSession httpSession, Model model) throws Exception {
-		MemberDTO dto = (MemberDTO) httpSession.getAttribute("member");
-		dto = memberService.login(dto);
-		model.addAttribute("member", dto);
+//		MemberDTO dto = (MemberDTO) httpSession.getAttribute("member");
+//		dto = memberService.login(dto);
+//		model.addAttribute("member", dto);
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.GET)
-	public void update(HttpSession httpSession, Model model) throws Exception {
+	public String update(MemberDTO memberDTO, HttpSession httpSession, Model model) throws Exception {
 		MemberDTO dto = (MemberDTO) httpSession.getAttribute("member");
-		dto = memberService.login(dto);
-		model.addAttribute("member", dto);
+		memberDTO.setMember_name(dto.getMember_name());
+		int result = memberService.update(memberDTO);
+		return "redirect:../";
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)

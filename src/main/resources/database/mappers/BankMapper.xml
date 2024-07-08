@@ -16,4 +16,9 @@
   			)
   	</insert>
   	
+  	<select id="getList" parameterType="MemberDTO" resultType="AccountDTO">
+  		SELECT	BANK_ID, BALANCE
+  		FROM	BANK
+  		WHERE	MEMBER_ID = #{member_id}
+  	</select>
   </mapper>
