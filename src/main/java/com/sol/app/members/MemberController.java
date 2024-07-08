@@ -52,11 +52,10 @@ public class MemberController {
 			response.addCookie(cookie);
 		}
 
-		Map<String, Object> map = memberService.login(dto);
-		
-		
-		if (map != null) {
-			httpSession.setAttribute("member", map);
+		dto = memberService.login(dto);
+
+		if (dto != null) {
+			httpSession.setAttribute("member", dto);
 			model.addAttribute("url", "/");
 			model.addAttribute("result", "로그인 성공");
 		} else {
@@ -104,11 +103,11 @@ public class MemberController {
 
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public String delete(Model model, HttpSession httpSession) throws Exception {
-		MemberDTO dto = (MemberDTO)httpSession.getAttribute("member");
+		MemberDTO dto = (MemberDTO) httpSession.getAttribute("member");
 		int num = memberService.delete(dto);
-		if(num > 0) {
+		if (num > 0) {
 			model.addAttribute("result", "계정이 삭제되었습니다.");
-			model.addAttribute("url", "/");			
+			model.addAttribute("url", "/");
 			httpSession.setAttribute("member", null);
 		} else {
 			model.addAttribute("result", "계정이 삭제실패.");
@@ -116,6 +115,5 @@ public class MemberController {
 		}
 		return "/commons/message";
 	}
-
 
 }

@@ -22,21 +22,20 @@ public class MemberService {
 		return memberDAO.join(dto);
 	}
 
-	public Map<String, Object> login(MemberDTO memberDTO) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
+	public MemberDTO login(MemberDTO memberDTO) throws Exception {
 		MemberDTO result = memberDAO.login(memberDTO);
 		if (result != null) {
 			if (result.getMember_pw().equals(memberDTO.getMember_pw())) {
 				// 로그인 성공 지점
-				List<AccountDTO> ar = accountDAO.getList(memberDTO);
-				map.put("member", result);
-				map.put("accounts", ar);
-				return map;
+				return result;
+				
 			} else {
 				return null;
+				
 			}
 		}
-		return null;
+		
+		return result;
 	}
 
 	public int update(MemberDTO dto) throws Exception {

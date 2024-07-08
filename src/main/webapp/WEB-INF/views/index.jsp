@@ -15,7 +15,7 @@
 
         <c:if test="${not empty sessionScope.member}">
           <div>
-            <h3>${sessionScope.member.member.member_name}님 환영합니다</h3>
+            <h3>${sessionScope.member.member_name}님 환영합니다</h3>
           </div>
         </c:if>
 

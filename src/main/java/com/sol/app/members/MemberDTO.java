@@ -1,12 +1,23 @@
 package com.sol.app.members;
 
+import java.util.List;
+
+import com.sol.app.accounts.AccountDTO;
+
 public class MemberDTO {
 	private String member_id;
 	private String member_pw;
 	private String member_name;
 	private String member_phone;
 	private String member_email;
+	private List<AccountDTO> dtos;
 	
+	public List<AccountDTO> getDtos() {
+		return dtos;
+	}
+	public void setDtos(List<AccountDTO> dtos) {
+		this.dtos = dtos;
+	}
 	public String getMember_id() {
 		return member_id;
 	}
