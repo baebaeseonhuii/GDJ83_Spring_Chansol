@@ -15,16 +15,22 @@
   				)
   	</insert>
   	
-  	<select id="login" parameterType="MemberDTO" resultMap="loginResult">
-  		SELECT	m.*, b.*
-		FROM	MEMBERS m LEFT JOIN BANK b
-				ON m.MEMBER_ID = b.MEMBER_ID
+  	<select id="login" parameterType="MemberDTO" resultType="MemberDTO">
+  		SELECT	MEMBER_ID, MEMBER_NAME, MEMBER_PW
+		FROM	MEMBERS m
 		WHERE	m.MEMBER_ID = #{member_id}
   	</select>
   	
-  	<resultMap type="MemberDTO" id="loginResult">
-  		<!-- primary key 받는 용도: -->
-  		<!-- column="컬럼명" property="setter의 이름" -->
+  	<select id="detail" parameterType="MemberDTO" resultMap="detailResult">
+  		SELECT 	m.*, b.*
+  		FROM	MEMBERS m LEFT JOIN BANK b
+  				ON m.MEMBER_ID = b.MEMBER_ID
+  		WHERE	m.MEMBER_ID = #{member_id} 	
+  	</select>
+  	
+  	<resultMap type="MemberDTO" id="detailResult">
+  		<!-- primary key 받는 용도:
+  		column="컬럼명" property="setter의 이름" -->
   		<id column="MEMBER_ID" property="member_id"/>
   		
   		<result column="MEMBER_PW" property="member_pw"/>

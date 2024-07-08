@@ -1,10 +1,23 @@
 package com.sol.app.product;
 
+import java.util.List;
+
+import com.sol.app.accounts.AccountDTO;
+
 public class ItemDTO {
 	private Long item_id;
 	private String item_name;
 	private String item_detail;
 	private Double item_rate;
+	private List<AccountDTO> dtos;
+
+	public List<AccountDTO> getDtos() {
+		return dtos;
+	}
+
+	public void setDtos(List<AccountDTO> dtos) {
+		this.dtos = dtos;
+	}
 
 	public Long getItem_id() {
 		return item_id;

@@ -10,17 +10,17 @@ import com.sol.app.members.MemberDTO;
 
 @Repository
 public class AccountDAO {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
 	private final String NAMESPACE = "com.sol.app.accounts.AccountDAO.";
-	
+
 	public int add(AccountDTO accountDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE + "add", accountDTO);
 	}
-	
-	public List<AccountDTO> getList(MemberDTO memberDTO) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "getList", memberDTO);
+
+	public AccountDTO detail(AccountDTO accountDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "detail", accountDTO);
 	}
 }

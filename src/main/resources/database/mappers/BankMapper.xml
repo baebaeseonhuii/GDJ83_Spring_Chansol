@@ -21,4 +21,30 @@
   		FROM	BANK
   		WHERE	MEMBER_ID = #{member_id}
   	</select>
+  	
+  	<select id="detail" parameterType="AccountDTO" resultMap="detailResult">
+  		SELECT	b.*, i.*
+  		FROM	BANK b INNER JOIN ITEMS i
+  				ON b.ITEM_ID = i.ITEM_ID
+  		WHERE	b.BANK_ID = #{bank_id}
+  	</select>
+  	
+  	<resultMap type="AccountDTO" id="detailResult">
+  		<id column="BANK_ID" property="bank_id"/>
+  		
+  		<result column="ITEM_ID" property="item_id"/>
+  		<result column="OPEN_DATE" property="open_date"/>
+  		<result column="BALANCE" property="balance"/>
+  		
+  		<association property="itemDTO" javaType="ItemDTO">
+  			<id column="ITEM_ID" property="item_id"/>
+  			
+  			<result column="ITEM_NAME" property="item_name"/>
+  			<result column="ITEM_RATE" property="item_rate"/>
+  			<result column="ITEM_DETAIL" property="item_detail"/>
+  			
+  		</association>
+  		
+  	</resultMap>
+  	
   </mapper>

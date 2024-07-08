@@ -2,6 +2,9 @@ package com.sol.app.accounts;
 
 import java.sql.Date;
 
+import com.sol.app.members.MemberDTO;
+import com.sol.app.product.ItemDTO;
+
 public class AccountDTO {
 	private String bank_id;
 	private String member_id;
@@ -9,7 +12,21 @@ public class AccountDTO {
 	private Date open_date;
 	private String bank_pw;
 	private Long balance;
+	private MemberDTO memberDTO;
+	private ItemDTO itemDTO;
 	
+	public MemberDTO getMemberDTO() {
+		return memberDTO;
+	}
+	public void setMemberDTO(MemberDTO memberDTO) {
+		this.memberDTO = memberDTO;
+	}
+	public ItemDTO getItemDTO() {
+		return itemDTO;
+	}
+	public void setItemDTO(ItemDTO itemDTO) {
+		this.itemDTO = itemDTO;
+	}
 	public String getBank_id() {
 		return bank_id;
 	}

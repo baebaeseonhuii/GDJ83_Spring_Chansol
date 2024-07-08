@@ -42,11 +42,17 @@ public class AccountController {
 			model.addAttribute("url", "/");
 		}
 		
-		return "/commons/messages";
+		return "/commons/message";
 	}
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public void getList() throws Exception {
 		
+	}
+	
+	@RequestMapping(value="detail", method=RequestMethod.GET)
+	public void detail(AccountDTO accountDTO, Model model) throws Exception {
+		accountDTO = accountService.detail(accountDTO);
+		model.addAttribute("dto",accountDTO);
 	}
 }
