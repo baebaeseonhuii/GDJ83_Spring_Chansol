@@ -13,10 +13,10 @@ public class Bank_infosDAO {
 	private final String NAMESPACE = "com.sol.app.bank_infos.Bank_infosDAO.";
 	
 	public int transfer(Bank_infosDTO bank_infosDTO) throws Exception {
-		return sqlSession.update(NAMESPACE + "transfer", bank_infosDTO);
+		return sqlSession.insert(NAMESPACE + "transfer", bank_infosDTO);
 	}
 	
 	public int transferU(Bank_infosDTO bank_infosDTO) throws Exception {
-		return sqlSession.update(NAMESPACE + "transferU", bank_infosDTO);
+		return sqlSession.insert(NAMESPACE + "transferU", bank_infosDTO);
 	}
 }
