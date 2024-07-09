@@ -16,6 +16,9 @@
         <c:if test="${not empty sessionScope.member}">
           <div>
             <h3>${sessionScope.member.member_name}님 환영합니다</h3>
+            <br>
+            <h3>사이트 주인 계좌번호: 001100000015</h3>
+            <h3>많은 후원 부탁드립니다 ^^</h3>
           </div>
         </c:if>
 

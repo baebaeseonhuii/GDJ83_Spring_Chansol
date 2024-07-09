@@ -8,11 +8,12 @@
   	<insert id="add" parameterType="AccountDTO">
   		INSERT INTO BANK (BANK_ID, MEMBER_ID, ITEM_ID, BANK_PW, BALANCE)
   		VALUES(
-  			LPAD(TO_CHAR(#{item_id}), 7, '0') || LPAD(TO_CHAR(BANKID_SEQ.NEXTVAL), 13, '0'),
+  			LPAD(TO_CHAR(#{item_id}), 4, '0') || LPAD(TO_CHAR(BANKID_SEQ.NEXTVAL), 8, '0'),
   			#{member_id},
   			#{item_id},
   			#{bank_pw},
-  			#{balance}
+  			100000
+  			<!-- #{balance} -->
   			)
   	</insert>
   	
@@ -28,6 +29,18 @@
   				ON b.ITEM_ID = i.ITEM_ID
   		WHERE	b.BANK_ID = #{bank_id}
   	</select>
+  	
+  	<update id="transfer" parameterType="Bank_infosDTO">
+  		UPDATE	BANK
+		SET		BALANCE = BALANCE - #{difference}
+		WHERE	BANK_id = #{bank_id}
+  	</update>
+  	
+  	<update id="transferU" parameterType="Bank_infosDTO">
+  		UPDATE	BANK
+		SET		BALANCE = BALANCE + #{difference}
+		WHERE	BANK_id = #{account_u}
+  	</update>
   	
   	<resultMap type="AccountDTO" id="detailResult">
   		<id column="BANK_ID" property="bank_id"/>

@@ -10,7 +10,6 @@
     <c:otherwise>
       <li class="nav-item"><a class="nav-link" href="/members/mypage">마이페이지</a></li>
       <li class="nav-item"><a class="nav-link" href="/members/logout">로그아웃</a></li>
-  <li class="nav-item"><a class="nav-link" href="/accounts/list">계좌조회</a></li>
     </c:otherwise>
   </c:choose>
   <li class="nav-item"><a class="nav-link" href="/product/list">상품</a></li>

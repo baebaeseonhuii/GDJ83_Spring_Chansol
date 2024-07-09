@@ -12,17 +12,19 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
       <div class="col-lg-7 col-md-9">
-
+        <div class="d-md-flex justify-content-md-end">
+          <a class="btn btn-primary justify-content-end me-2" href="/accounts/transfer?bank_id=${dto.bank_id}" role="button">이체</a>
+        </div>
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>BANK_ID</th>
-              <th>MEMBER_NAME</th>
-              <th>ITEM_ID</th>
-              <th>OPEN_DATE</th>
-              <th>BALANCE</th>
-              <th>ITEM_NAME</th>
-              <th>ITEM_RATE</th>
+              <th>계좌번호</th>
+              <th>가입자명</th>
+              <th>상품번호</th>
+              <th>개설일</th>
+              <th>잔액</th>
+              <th>상품명</th>
+              <th>이자율</th>
             </tr>
           </thead>
           <tbody>

@@ -8,13 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sol.app.bank_infos.Bank_infosDTO;
 import com.sol.app.members.MemberDTO;
+import com.sol.app.members.MemberService;
 
 @Controller
 @RequestMapping("/accounts/*")
 public class AccountController {
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value="add", method=RequestMethod.GET)
 	public void add() throws Exception {
@@ -54,5 +59,24 @@ public class AccountController {
 	public void detail(AccountDTO accountDTO, Model model) throws Exception {
 		accountDTO = accountService.detail(accountDTO);
 		model.addAttribute("dto",accountDTO);
+	}
+	
+	@RequestMapping(value="transfer", method=RequestMethod.GET)
+	public void transfer (Model model, AccountDTO accountDTO) throws Exception {
+		accountDTO = accountService.detail(accountDTO);
+		model.addAttribute("selectedAccount", accountDTO);
+	}
+	
+	@RequestMapping(value="transfer", method=RequestMethod.POST)
+	public String transfer (HttpSession httpSession, Model model, Bank_infosDTO bank_infosDTO, String bank_pw) throws Exception {
+		MemberDTO memberDTO = (MemberDTO)httpSession.getAttribute("member");
+		memberDTO = memberService.detail(memberDTO);
+		int num = accountService.transfer(memberDTO, bank_infosDTO, bank_pw);
+		if (num == -1) {
+			model.addAttribute("result", "존재하지 않는 계좌번호입니다.");
+			model.addAttribute("url", "/members/mypage");
+			return "/commons/message";
+		}
+		return "redirect:/members/mypage";
 	}
 }

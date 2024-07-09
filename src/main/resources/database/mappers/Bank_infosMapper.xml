@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.sol.app.bank_infos.Bank_infosDAO">
+  
+  	<insert id="transfer" parameterType="Bank_infosDTO">
+		INSERT INTO BANK_INFOS
+		(BANK_ID, BALANCE, DIFFERENCE, ACCOUNT_U)
+		VALUES	(
+				#{bank_id}
+			,	(
+					SELECT	BALANCE
+					FROM	BANK
+					WHERE	BANK_ID = #{bank_id}
+				)
+			,	#{difference}*(-1)
+			,	#{account_u}
+			)
+  	</insert>
+  	
+  	  	<insert id="transferU" parameterType="Bank_infosDTO">
+		INSERT INTO BANK_INFOS
+		(BANK_ID, BALANCE, DIFFERENCE, ACCOUNT_U)
+		VALUES	(
+				#{account_u}
+			,	(
+					SELECT	BALANCE
+					FROM	BANK
+					WHERE	BANK_ID = #{account_u}
+				)
+			,	#{difference}
+			,	#{bank_id}
+			)
+  	</insert>
+  	
+  </mapper>
