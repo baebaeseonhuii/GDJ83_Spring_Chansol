@@ -20,7 +20,7 @@
 			)
   	</insert>
   	
-  	  	<insert id="transferU" parameterType="Bank_infosDTO">
+	  <insert id="transferU" parameterType="Bank_infosDTO">
 		INSERT INTO BANK_INFOS
 		(BANK_ID, BALANCE, DIFFERENCE, ACCOUNT_U)
 		VALUES	(
@@ -34,5 +34,30 @@
 			,	#{bank_id}
 			)
   	</insert>
+  	
+  	<select id="getList" parameterType="ListOption" resultType="Bank_infosDTO">
+  		SELECT		TIMEPOINT, DIFFERENCE, BALANCE
+  		FROM		BANK_INFOS
+  		WHERE		BANK_ID = #{bank_id} 
+					  					<choose>
+					  						<when test="IO == 1">
+					  							AND DIFFERENCE > 0
+					  						</when>
+					  						<when test="IO == 0">
+					  							AND 0 > DIFFERENCE
+					  						</when>
+					  					</choose>
+					  					
+ 		ORDER BY	TIMEPOINT 
+								<choose>
+									<when test="order == 1">
+										ASC
+									</when>
+									<otherwise>
+										DESC
+									</otherwise>
+								</choose>
+ 		
+  	</select>
   	
   </mapper>

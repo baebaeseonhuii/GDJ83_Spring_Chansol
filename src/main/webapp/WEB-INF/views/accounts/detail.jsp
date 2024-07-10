@@ -13,6 +13,7 @@
     <div class="row justify-content-center mt-5">
       <div class="col-lg-7 col-md-9">
         <div class="d-md-flex justify-content-md-end">
+          <a class="btn btn-primary justify-content-end me-2" href="/accounts/list?bank_id=${dto.bank_id}" role="button">거래내역</a>
           <a class="btn btn-primary justify-content-end me-2" href="/accounts/transfer?bank_id=${dto.bank_id}" role="button">이체</a>
         </div>
         <table class="table table-hover">

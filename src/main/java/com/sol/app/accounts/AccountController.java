@@ -1,5 +1,7 @@
 package com.sol.app.accounts;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +53,9 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
-	public void getList() throws Exception {
-		
+	public void getList(ListOption listOption, Model model) throws Exception {
+		List<Bank_infosDTO> list = accountService.getList(listOption);
+		model.addAttribute("bank_infos", list);
 	}
 	
 	@RequestMapping(value="detail", method=RequestMethod.GET)
@@ -79,4 +82,5 @@ public class AccountController {
 		}
 		return "redirect:/members/mypage";
 	}
+
 }

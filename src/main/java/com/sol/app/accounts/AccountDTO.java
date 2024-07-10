@@ -63,4 +63,5 @@ public class AccountDTO {
 	public void setBalance(Long balance) {
 		this.balance = balance;
 	}
+
 }

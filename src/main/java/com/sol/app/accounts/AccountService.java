@@ -1,5 +1,7 @@
 package com.sol.app.accounts;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,10 @@ public class AccountService {
 			}
 		}
 		return -1;
+	}
+	
+	public List<Bank_infosDTO> getList(ListOption listOption) throws Exception {
+		return accountDAO.getList(listOption);
 	}
 	
 }

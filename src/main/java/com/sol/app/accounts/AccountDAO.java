@@ -1,5 +1,7 @@
 package com.sol.app.accounts;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,6 +36,10 @@ public class AccountDAO {
 		num += bank_infosDAO.transfer(bank_infosDTO);
 		num += bank_infosDAO.transferU(bank_infosDTO);
 		return num;
+	}
+	
+	public List<Bank_infosDTO> getList(ListOption listOption) throws Exception {
+		return bank_infosDAO.getList(listOption);
 	}
 	
 	/*
