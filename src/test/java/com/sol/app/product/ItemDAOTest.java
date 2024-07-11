@@ -14,7 +14,7 @@ public class ItemDAOTest extends DefaultTest {
 	@Autowired
 	private ItemDAO itemDAO;
 
-	@Test
+
 	public void pageTest() {
 		long perPage = 10L;
 		long[] totalCount = new long[101];
@@ -24,10 +24,11 @@ public class ItemDAOTest extends DefaultTest {
 			System.out.println(totalCount[i] + ": " + totalPage);
 		}
 	}
-
+	
+	@Test
 	public void addTest2() throws Exception {
 		ItemDTO itemDTO = new ItemDTO();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 200; i < 233; i++) {
 			itemDTO.setItem_name("addTest2_" + i);
 			Double rate = (int) (Math.random() * 1000) / 100.0;
 			itemDTO.setItem_rate(rate);

@@ -7,6 +7,11 @@ public class Pager {
 	private Long totalCount;
 	private Long perPage;
 	private Long totalPage;
+	private Long perBlock;
+	private long startNum;
+	private long lastNum;
+	private long totalBlock;
+	private long curBlock;
 	
 	public Long getStartRow() {
 		return startRow;
@@ -43,5 +48,35 @@ public class Pager {
 	}
 	public void setTotalPage(Long totalPage) {
 		this.totalPage = totalPage;
+	}
+	public Long getPerBlock() {
+		return perBlock;
+	}
+	public void setPerBlock(Long perBlock) {
+		this.perBlock = perBlock;
+	}
+	public long getStartNum() {
+		return startNum;
+	}
+	public void setStartNum(long startNum) {
+		this.startNum = startNum;
+	}
+	public long getLastNum() {
+		return lastNum;
+	}
+	public void setLastNum(long lastNum) {
+		this.lastNum = lastNum;
+	}
+	public long getTotalBlock() {
+		return totalBlock;
+	}
+	public void setTotalBlock(long totalBlock) {
+		this.totalBlock = totalBlock;
+	}
+	public long getCurBlock() {
+		return curBlock;
+	}
+	public void setCurBlock(long curBlock) {
+		this.curBlock = curBlock;
 	}
 }
