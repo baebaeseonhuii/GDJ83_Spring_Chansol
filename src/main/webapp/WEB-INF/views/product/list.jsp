@@ -12,7 +12,15 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
       <div class="col-lg-7 col-md-9">
-
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="./list?page=1">1</a></li>
+            <li class="page-item"><a class="page-link" href="./list?page=2">2</a></li>
+            <li class="page-item"><a class="page-link" href="./list?page=3">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
         <div class="d-md-flex justify-content-md-end">
           <a class="btn btn-primary justify-content-end" href="./add" role="button">상품등록</a>
         </div>

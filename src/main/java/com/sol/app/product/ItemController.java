@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sol.app.util.Pager;
+
 @Controller
 @RequestMapping("/product/")
 public class ItemController {
@@ -15,8 +17,8 @@ public class ItemController {
 	private ItemService itemService;
 	
 	@RequestMapping("list")
-	public void getList(Model model) throws Exception {
-		List<ItemDTO> list = itemService.getList();
+	public void getList(Model model, Pager pager) throws Exception {
+		List<ItemDTO> list = itemService.getList(pager);
 		model.addAttribute("list", list);
 	}
 	
