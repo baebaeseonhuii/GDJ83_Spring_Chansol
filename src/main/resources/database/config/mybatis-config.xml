@@ -10,6 +10,7 @@
  		<typeAlias type="com.sol.app.accounts.AccountDTO" alias="AccountDTO"/>
  		<typeAlias type="com.sol.app.accounts.ListOption" alias="ListOption"/>
  		<typeAlias type="com.sol.app.bank_infos.Bank_infosDTO" alias="Bank_infosDTO"/>
+ 		<typeAlias type="com.sol.app.notice.NoticeDTO" alias="NoticeDTO"/>
  		<typeAlias type="java.util.Map" alias="Map"/>
  		<typeAlias type="java.util.List" alias="List"/>
  		<typeAlias type="com.sol.app.util.Pager" alias="Pager"/>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <ul class="nav justify-content-center nav-tabs nav-pills">
   <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+  <li class="nav-item"><a class="nav-link" href="/notice/list">공지사항</a></li>
   <c:choose>
     <c:when test="${empty sessionScope.member}">
       <li class="nav-item"><a class="nav-link" href="/members/join">회원가입</a></li>

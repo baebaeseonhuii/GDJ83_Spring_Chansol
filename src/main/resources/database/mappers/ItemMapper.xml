@@ -51,7 +51,7 @@
 								</choose>
 							</where>
 							ORDER BY	ITEM_ID DESC	) i)
-			WHERE	R BETWEEN #{startRow} AND #{lastRow}
+			WHERE	r BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
 	<select id="countList" resultType="java.lang.Long" parameterType="Pager">
