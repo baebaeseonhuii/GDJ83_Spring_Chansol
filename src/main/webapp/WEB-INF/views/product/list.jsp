@@ -12,11 +12,36 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
       <div class="col-lg-7 col-md-9">
-
-        <%-- <c:if test=""> --%>
-          <div class="d-md-flex justify-content-md-end">
-            <a class="btn btn-primary justify-content-end" href="./add" role="button">상품등록</a>
+        <!-- 검색 입력 폼 -->
+        <form action="./list" class="row row-cols-lg-auto g-3 align-items-center">
+          <div class="col-12">
+            <label class="visually-hidden" for="inlineFormInputGroupUsername">Search</label>
+              <input type="text" name="search" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
           </div>
+
+          <div class="col-12">
+            <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+            <select name="kind" class="form-select" id="inlineFormSelectPref">
+              <option value="k1" ${map.pager.kind == 'k1' ? 'selected' : '' }>상품명</option>
+              <option value="k2" ${map.pager.kind == 'k1' ? '' : 'selected' }>상품내용</option>
+            </select>
+          </div>
+
+          <!-- <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="inlineFormCheck"> <label class="form-check-label" for="inlineFormCheck"> Remember me </label>
+            </div>
+          </div> -->
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">검색</button>
+          </div>
+        </form>
+        
+        <br>
+        
+        <%-- <c:if test=""> --%>
+
         <%-- </c:if> --%>
 
         <table class="table table-hover">
@@ -38,14 +63,17 @@
           </tbody>
         </table>
         <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item ${map.pager.startNum != 1 ? '' : 'disabled'}"><a class="page-link" href="./list?page=${map.pager.startNum-1}">Previous</a></li>
+          <ul class="pagination justify-content-center">
+            <li class="page-item ${map.pager.startNum != 1 ? '' : 'disabled'}"><a class="page-link" href="./list?page=${map.pager.startNum-1}&kind=${map.pager.kind}&search=${map.pager.search}">Previous</a></li>
             <c:forEach begin="${map.pager.startNum}" end="${map.pager.lastNum}" var="i">
-            <li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>              
+              <li class="page-item"><a class="page-link ${map.pager.page == i ? 'active' : ''  }" href="./list?page=${i}&kind=${map.pager.kind}&search=${map.pager.search}">${i}</a></li>
             </c:forEach>
-            <li class="page-item ${map.pager.lastNum != map.pager.totalPage ? '':'disabled'}"><a class="page-link" href="./list?page=${map.pager.lastNum+1}">Next</a></li>
+            <li class="page-item ${map.pager.lastNum != map.pager.totalPage ? '':'disabled'}"><a class="page-link" href="./list?page=${map.pager.lastNum+1}&kind=${map.pager.kind}&search=${map.pager.search}">Next</a></li>
           </ul>
         </nav>
+        <div class="d-md-flex justify-content-md-end">
+          <a class="btn btn-primary justify-content-end" href="./add" role="button">상품등록</a>
+        </div>
       </div>
     </div>
   </div>

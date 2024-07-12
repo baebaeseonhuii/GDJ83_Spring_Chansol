@@ -20,11 +20,12 @@ public class ItemService {
 		// 첫번째 숫자 1 11 21
 		// 두번째 숫자 10 20 30
 		if (pager.getPage() == null || pager.getPage() < 1) pager.setPage(1L);
+		if (pager.getSearch() == null) pager.setSearch("");
 
 		Long perPage = 10L;
 		pager.setPerPage(10L);
 
-		pager.setTotalCount(itemDAO.countList());
+		pager.setTotalCount(itemDAO.countList(pager));
 		
 		//1. 총 개수를 이용해서 총 페이지수 구하기
 		pager.setTotalPage((long) Math.ceil((double) pager.getTotalCount() / pager.getPerPage()));

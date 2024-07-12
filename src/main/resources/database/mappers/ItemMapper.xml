@@ -34,17 +34,39 @@
 	
 	<select id="getList" resultType="ItemDTO" parameterType="Pager">
 		<![CDATA[
+		]]>
 			SELECT * FROM 
 			(	SELECT 		ROWNUM r, i.*
 				FROM	(	SELECT 		*
 							FROM 		ITEMS
+							<where>		
+										ITEM_ID > 0	
+								<choose>
+									<when test="kind == 'k1'">
+										AND ITEM_NAME LIKE '%'||#{search}||'%'
+									</when>
+									<otherwise>
+										AND ITEM_DETAIL LIKE '%'||#{search}||'%'
+									</otherwise>
+								</choose>
+							</where>
 							ORDER BY	ITEM_ID DESC	) i)
-			WHERE	R >= #{startRow} AND R <= #{lastRow}
-		]]>
+			WHERE	R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="countList" resultType="java.lang.Long">
+	<select id="countList" resultType="java.lang.Long" parameterType="Pager">
 		SELECT COUNT(ITEM_ID) FROM ITEMS
+		<where>		
+				ITEM_ID > 0	
+		<choose>
+			<when test="kind == 'k1'">
+				AND ITEM_NAME LIKE '%'||#{search}||'%'
+			</when>
+			<otherwise>
+				AND ITEM_DETAIL LIKE '%'||#{search}||'%'
+			</otherwise>
+		</choose>
+	</where>
 	</select>
 	
 </mapper>

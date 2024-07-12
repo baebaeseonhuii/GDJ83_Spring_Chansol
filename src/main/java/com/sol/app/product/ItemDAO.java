@@ -36,7 +36,7 @@ public class ItemDAO {
 		return sqlSession.update(NAMESPACE + "update", dto);
 	}
 
-	public long countList() {
-		return sqlSession.selectOne(NAMESPACE + "countList");
+	public long countList(Pager pager) {
+		return sqlSession.selectOne(NAMESPACE + "countList", pager);
 	}
 }

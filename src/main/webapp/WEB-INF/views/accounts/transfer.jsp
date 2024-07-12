@@ -29,13 +29,12 @@
           </tbody>
         </table>
 
-        <br>
-        <br>
+        <br> <br>
 
         <form class="row g-3" method="post" id="frm" action="./transfer">
           <input type="hidden" value="${selectedAccount.bank_id}" name="bank_id">
           <div class="col-md-12">
-            <label for="bank_id" class="form-label">상대방계좌번호</label> <input type="text" class="form-control" name="account_u">
+            <label for="bank_id" class="form-label">상대방계좌번호</label> <input type="text" class="form-control" name="account_u" id="account_u">
           </div>
           <div class="col-md-12">
             <label for="difference" class="form-label">이체금액</label> <input type="number" class="form-control" name="difference" id="difference">
@@ -55,13 +54,18 @@
   </div>
 
   <script>
+			const account_u = document.getElementById("account_u");
 			const bank_pw = document.getElementById("bank_pw");
 			const smbtn = document.getElementById("smbtn");
 			const frm = document.getElementById("frm");
 			const difference = document.getElementById("difference");
 
 			smbtn.addEventListener("click", function() {
-				if (bank_pw.value == "") {
+				if (account_u.value == "") {
+					alert("공백을 채워주세요");
+				} else if (bank_pw.value == "") {
+					alert("공백을 채워주세요");
+				} else if (difference.value == "") {
 					alert("공백을 채워주세요");
 				} else if (bank_pw.value * 1.0 != bank_pw.value
 						|| bank_pw.value.length != 4) {

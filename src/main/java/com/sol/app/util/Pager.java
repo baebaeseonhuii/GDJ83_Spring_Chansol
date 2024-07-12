@@ -12,9 +12,23 @@ public class Pager {
 	private long lastNum;
 	private long totalBlock;
 	private long curBlock;
+	private String kind;
+	private String search;
 	
 	public Long getStartRow() {
 		return startRow;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
 	}
 	public void setStartRow(Long startRow) {
 		this.startRow = startRow;
