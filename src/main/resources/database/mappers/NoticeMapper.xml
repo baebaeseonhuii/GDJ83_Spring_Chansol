@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- mapper는 테이블 별로 하나씩 만들 거다. namespace는 중복되면 안된다. -->
-<mapper namespace="com.sol.app.notice.NoticeDAO">
+<mapper namespace="com.sol.app.boards.notices.NoticeDAO">
 	<select id="getList" parameterType="Pager" resultType="NoticeDTO">
 		SELECT * FROM 
 		(	SELECT 		ROWNUM r, n.*
@@ -15,6 +15,9 @@
 							<choose>
 								<when test="kind == 'k1'">
 									AND BOARDTITLE LIKE '%'||#{search}||'%'
+								</when>
+								<when test="kind == 'k3'">
+									AND BOARDWRITER LIKE '%'||#{search}||'%'
 								</when>
 								<otherwise>
 									AND BOARDCONTENTS LIKE '%'||#{search}||'%'

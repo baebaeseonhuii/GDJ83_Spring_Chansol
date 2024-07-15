@@ -17,6 +17,8 @@ public class ItemDAO {
 	private final String NAMESPACE = "com.sol.app.product.ItemDAO.";
 
 	public List<ItemDTO> getList(Pager pager) throws Exception {
+		Long result = sqlSession.selectOne(NAMESPACE + "countSearch", pager);
+		if(result == 0L) return null;
 		return sqlSession.selectList(NAMESPACE + "getList", pager);
 	}
 

@@ -1,4 +1,4 @@
-package com.sol.app.notice;
+package com.sol.app.boards.notices;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	private final String NAMESPACE = "com.sol.app.notice.NoticeDAO.";
+	private final String NAMESPACE = "com.sol.app.boards.notices.NoticeDAO.";
 	
 	public List<NoticeDTO> getList(Pager pager) throws Exception {
 		Long result = sqlSession.selectOne(NAMESPACE + "countSearch", pager);

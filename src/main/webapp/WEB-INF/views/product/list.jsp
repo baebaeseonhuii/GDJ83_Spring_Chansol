@@ -53,7 +53,7 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach items="${requestScope.map.list}" var="dto">
+            <c:forEach items="${requestScope.list}" var="dto">
               <tr>
                 <td>${dto.item_id}</td>
                 <td><a href="./detail?item_id=${dto.item_id}">${dto.item_name}</a></td>
@@ -64,11 +64,11 @@
         </table>
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
-            <li class="page-item ${map.pager.startNum != 1 ? '' : 'disabled'}"><a class="page-link" href="./list?page=${map.pager.startNum-1}&kind=${map.pager.kind}&search=${map.pager.search}">Previous</a></li>
-            <c:forEach begin="${map.pager.startNum}" end="${map.pager.lastNum}" var="i">
-              <li class="page-item"><a class="page-link ${map.pager.page == i ? 'active' : ''  }" href="./list?page=${i}&kind=${map.pager.kind}&search=${map.pager.search}">${i}</a></li>
+            <li class="page-item ${pager.pre ? '' : 'disabled'}"><a class="page-link" href="./list?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">Previous</a></li>
+            <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+              <li class="page-item"><a class="page-link ${pager.page == i ? 'active' : ''  }" href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
             </c:forEach>
-            <li class="page-item ${map.pager.lastNum != map.pager.totalPage ? '':'disabled'}"><a class="page-link" href="./list?page=${map.pager.lastNum+1}&kind=${map.pager.kind}&search=${map.pager.search}">Next</a></li>
+            <li class="page-item ${pager.next ? '':'disabled'}"><a class="page-link" href="./list?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">Next</a></li>
           </ul>
         </nav>
         <div class="d-md-flex justify-content-md-end">

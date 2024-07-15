@@ -1,8 +1,8 @@
-package com.sol.app.notice;
+package com.sol.app.boards;
 
 import java.sql.Date;
 
-public class NoticeDTO {
+public class BoardDTO {
 	private Long boardNum;
 	private String boardWriter;
 	private String boardTitle;
@@ -11,6 +11,7 @@ public class NoticeDTO {
 	private Long boardHit;
 	private String boardContents;
 	private Character boardCategory;
+	
 	public Long getBoardNum() {
 		return boardNum;
 	}
@@ -59,5 +60,4 @@ public class NoticeDTO {
 	public void setBoardCategory(Character boardCategory) {
 		this.boardCategory = boardCategory;
 	}
-	
 }

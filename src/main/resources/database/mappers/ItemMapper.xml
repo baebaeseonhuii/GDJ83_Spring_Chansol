@@ -69,4 +69,20 @@
 	</where>
 	</select>
 	
+	<select id="countSearch" parameterType="Pager" resultType="java.lang.Long">
+		SELECT COUNT(ITEM_ID)
+		FROM ITEMS
+		<where>		
+			ITEM_ID > 0	
+			<choose>
+				<when test="kind == 'k1'">
+					AND ITEM_NAME LIKE '%'||#{search}||'%'
+				</when>
+				<otherwise>
+					AND ITEM_DETAIL LIKE '%'||#{search}||'%'
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
 </mapper>

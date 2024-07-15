@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sol.app.DefaultTest;
+import com.sol.app.boards.notices.NoticeDAO;
+import com.sol.app.boards.notices.NoticeDTO;
 import com.sol.app.util.Pager;
 
 public class NoticeDAOTest extends DefaultTest {

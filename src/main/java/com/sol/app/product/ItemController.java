@@ -1,5 +1,6 @@
 package com.sol.app.product;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,9 +19,15 @@ public class ItemController {
 	private ItemService itemService;
 	
 	@RequestMapping("list")
-	public void getList(Model model, Pager pager) throws Exception {
-		Map<String, Object> map = itemService.getList(pager);
-		model.addAttribute("map", map);
+	public String getList(Model model, Pager pager) throws Exception {
+		List<ItemDTO> list = itemService.getList(pager);
+		if(list == null) {
+			model.addAttribute("result", "상품이 존재하지 않습니다");
+			model.addAttribute("url", "/product/list");
+			return "/commons/message"; 
+		}
+		model.addAttribute("list", list);
+		return "/product/list";
 	}
 	
 	@RequestMapping("detail")

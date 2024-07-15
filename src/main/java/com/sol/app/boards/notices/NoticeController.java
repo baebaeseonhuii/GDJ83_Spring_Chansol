@@ -1,4 +1,4 @@
-package com.sol.app.notice;
+package com.sol.app.boards.notices;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,16 +24,13 @@ public class NoticeController {
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String getList(Pager pager, Model model) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<NoticeDTO> result = noticeService.getList(pager);
-		if(result == null) {
+		List<NoticeDTO> list = noticeService.getList(pager);
+		if(list == null) {
 			model.addAttribute("result", "게시글이 존재하지 않습니다");
 			model.addAttribute("url", "/notice/list");
 			return "/commons/message"; 
 		}
-		map.put("list", noticeService.getList(pager));
-		map.put("pager", pager);
-		model.addAttribute("map", map);
+		model.addAttribute("list", list);
 		return "/notice/list";
 	}
 
