@@ -8,7 +8,7 @@
 <c:import url="/WEB-INF/views/sample/bootHeader.jsp"></c:import>
 </head>
 <body>
-  <c:import url="/WEB-INF/views/sample/headerMemberLogin.jsp"></c:import>
+  <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 
   <div class="container">
     <div class="row justify-content-center mt-5">

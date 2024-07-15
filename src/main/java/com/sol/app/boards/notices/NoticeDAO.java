@@ -6,42 +6,44 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sol.app.boards.BoardDAO;
+import com.sol.app.boards.BoardDTO;
 import com.sol.app.util.Pager;
 
 @Repository
-public class NoticeDAO {
+public class NoticeDAO implements BoardDAO{
 	
 	@Autowired
 	private SqlSession sqlSession;
 
 	private final String NAMESPACE = "com.sol.app.boards.notices.NoticeDAO.";
 	
-	public List<NoticeDTO> getList(Pager pager) throws Exception {
+	public List<BoardDTO> getList(Pager pager) throws Exception {
 		Long result = sqlSession.selectOne(NAMESPACE + "countSearch", pager);
 		if(result == 0L) return null;
 		return sqlSession.selectList(NAMESPACE + "getList", pager);
 	}
 
-	public NoticeDTO getDetail(NoticeDTO noticeDTO) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getDetail", noticeDTO);
+	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getDetail", boardDTO);
 	}
 	
-	public void hit(NoticeDTO noticeDTO) throws Exception {
-		sqlSession.update(NAMESPACE + "hit", noticeDTO);
+	public void hit(BoardDTO boardDTO) throws Exception {
+		sqlSession.update(NAMESPACE + "hit", boardDTO);
 	}
 
-	public int update(NoticeDTO noticeDTO) throws Exception {
-		return sqlSession.update(NAMESPACE + "update", noticeDTO);
-
-	}
-
-	public int add(NoticeDTO noticeDTO) throws Exception {
-		return sqlSession.insert(NAMESPACE + "add", noticeDTO);
+	public int update(BoardDTO boardDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "update", boardDTO);
 
 	}
 
-	public int delete(NoticeDTO noticeDTO) throws Exception {
-		return sqlSession.delete(NAMESPACE + "delete", noticeDTO);
+	public int add(BoardDTO boardDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "add", boardDTO);
+
+	}
+
+	public int delete(BoardDTO boardDTO) throws Exception {
+		return sqlSession.delete(NAMESPACE + "delete", boardDTO);
 
 	}
 	
