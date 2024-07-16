@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,6 +24,11 @@ public class NoticeController {
 	@Autowired
 	@Qualifier("noticeService")
 	private BoardService boardService;
+	
+	@ModelAttribute("board")
+	public String getBoard() {
+		return "Notice";
+	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String getList(Pager pager, Model model) throws Exception {
@@ -30,6 +36,7 @@ public class NoticeController {
 		if(list == null) {
 			model.addAttribute("result", "게시글이 존재하지 않습니다");
 			model.addAttribute("url", "/board/list");
+			model.addAttribute("board", "notice");
 			return "/commons/message"; 
 		}
 		model.addAttribute("list", list);

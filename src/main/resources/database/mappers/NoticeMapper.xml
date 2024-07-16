@@ -5,25 +5,30 @@
 
 <!-- mapper는 테이블 별로 하나씩 만들 거다. namespace는 중복되면 안된다. -->
 <mapper namespace="com.sol.app.boards.notices.NoticeDAO">
+
+	<sql id="searchSql">
+		<where>		
+			BOARDNUM > 0	
+			<choose>
+				<when test="kind == 'k1'">
+					AND BOARDTITLE LIKE '%'||#{search}||'%'
+				</when>
+				<when test="kind == 'k3'">
+					AND BOARDWRITER LIKE '%'||#{search}||'%'
+				</when>
+				<otherwise>
+					AND BOARDCONTENTS LIKE '%'||#{search}||'%'
+				</otherwise>
+			</choose>
+		</where>
+	</sql>
+	
 	<select id="getList" parameterType="Pager" resultType="NoticeDTO">
 		SELECT * FROM 
 		(	SELECT 		ROWNUM r, n.*
 			FROM	(	SELECT 		*
 						FROM 		NOTICE
-						<where>		
-									BOARDNUM > 0	
-							<choose>
-								<when test="kind == 'k1'">
-									AND BOARDTITLE LIKE '%'||#{search}||'%'
-								</when>
-								<when test="kind == 'k3'">
-									AND BOARDWRITER LIKE '%'||#{search}||'%'
-								</when>
-								<otherwise>
-									AND BOARDCONTENTS LIKE '%'||#{search}||'%'
-								</otherwise>
-							</choose>
-						</where>
+						<include refid="searchSql"/>
 						ORDER BY	BOARDNUM DESC	) n)
 		WHERE	r BETWEEN #{startRow} AND #{lastRow}
 	</select>
@@ -33,20 +38,7 @@
 		FROM	(
 			SELECT	*
 			FROM	NOTICE
-			<where>		
-				BOARDNUM > 0	
-				<choose>
-					<when test="kind == 'k1'">
-						AND BOARDTITLE LIKE '%'||#{search}||'%'
-					</when>
-					<when test="kind == 'k3'">
-						AND BOARDWRITER LIKE '%'||#{search}||'%'
-					</when>
-					<otherwise>
-						AND BOARDCONTENTS LIKE '%'||#{search}||'%'
-					</otherwise>
-				</choose>
-			</where>
+			<include refid="searchSql"/>
 		)
 	</select>
 	
@@ -83,20 +75,7 @@
 	
 	<select id="countSearch" parameterType="Pager" resultType="java.lang.Long">
 		SELECT COUNT(BOARDNUM)
-		FROM NOTICE
-		<where>		
-			BOARDNUM > 0	
-			<choose>
-				<when test="kind == 'k1'">
-					AND BOARDTITLE LIKE '%'||#{search}||'%'
-				</when>
-				<when test="kind == 'k3'">
-					AND BOARDWRITER LIKE '%'||#{search}||'%'
-				</when>
-				<otherwise>
-					AND BOARDCONTENTS LIKE '%'||#{search}||'%'
-				</otherwise>
-			</choose>
-		</where>
+		FROM NOTICE	
+		<include refid="searchSql"/>
 	</select>
 </mapper>

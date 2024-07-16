@@ -38,7 +38,7 @@ public class MemberController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(Model model, MemberDTO dto, HttpServletResponse response, String remember,
-			HttpSession httpSession) throws Exception {
+		HttpSession httpSession) throws Exception {
 		System.out.println(dto.getMember_id());
 		System.out.println(dto.getMember_pw());
 		System.out.println(remember);

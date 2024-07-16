@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sol.app.DefaultTest;
+import com.sol.app.boards.BoardDTO;
 import com.sol.app.boards.notices.NoticeDAO;
 import com.sol.app.boards.notices.NoticeDTO;
 import com.sol.app.util.Pager;
@@ -33,8 +34,8 @@ public class NoticeDAOTest extends DefaultTest {
 
 	@Test
 	public void getListTest() throws Exception {
-		List<NoticeDTO> list = noticeDAO.getList(pager);
-		for(NoticeDTO dto : list) {
+		List<BoardDTO> list = noticeDAO.getList(pager);
+		for(BoardDTO dto : list) {
 			System.out.println(dto.getBoardTitle());
 		}
 	}

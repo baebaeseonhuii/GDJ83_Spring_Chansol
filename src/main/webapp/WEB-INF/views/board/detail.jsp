@@ -12,15 +12,17 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
       <div class="col-lg-7 col-md-9">
-      <c:choose>
-        <c:when test="${sessionScope.member.member_id == dto.boardWriter}">
         <div class="d-md-flex justify-content-md-end">
-          <a class="btn btn-primary justify-content-end me-2" href="./update?boardNum=${dto.boardNum}" role="button">수정</a>
-          <a class="btn btn-primary justify-content-end" href="./delete?boardNum=${dto.boardNum}" role="button">삭제</a>
+            <c:if test="${sessionScope.member.member_id == dto.boardWriter}">
+              <a class="btn btn-primary justify-content-end me-2" href="./update?boardNum=${dto.boardNum}" role="button">수정</a>
+              <a class="btn btn-primary justify-content-end me-2" href="./delete?boardNum=${dto.boardNum}" role="button">삭제</a>
+            </c:if>
+            <c:if test="${board ne 'Notice'}">
+              <c:if test="${member.member_id ne null}">
+                <a class="btn btn-primary justify-content-end me" href="./reply?boardNum=${dto.boardNum}" role="button">답글</a>
+              </c:if>
+            </c:if>
         </div>
-        </c:when>
-      </c:choose>
-
         <table class="table table-hover">
           <thead>
             <tr>
@@ -28,6 +30,7 @@
               <th>제목</th>
               <th>작성자</th>
               <th>작성일</th>
+              <th>수정일</th>
               <th>조회수</th>
             </tr>
           </thead>
@@ -37,10 +40,11 @@
               <td>${dto.boardTitle}</td>
               <td>${dto.boardWriter}</td>
               <td>${dto.createDate}</td>
+              <td>${dto.updateDate}</td>
               <td>${dto.boardHit}</td>
             </tr>
             <tr>
-              <td colspan='5'>세부정보: ${dto.boardContents}</td>
+              <td colspan='6'>세부정보: ${dto.boardContents}</td>
             </tr>
           </tbody>
         </table>

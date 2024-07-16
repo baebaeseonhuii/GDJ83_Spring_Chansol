@@ -9,9 +9,11 @@
 </head>
 <body>
   <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
+
   <div class="container">
     <div class="row justify-content-center mt-5">
       <div class="col-lg-7 col-md-9">
+        <div>${board}</div>
         <!-- 검색 입력 폼 -->
         <form action="./list" class="row row-cols-lg-auto g-3 align-items-center">
           <div class="col-12">
@@ -20,9 +22,9 @@
 
           <div class="col-12">
             <label class="visually-hidden" for="inlineFormSelectPref">Preference</label> <select name="kind" class="form-select" id="inlineFormSelectPref">
-              <option value="k1" ${map.pager.kind == 'k1' ? 'selected' : '' }>글제목</option>
-              <option value="k2" ${map.pager.kind == 'k2' ? 'selected' : '' }>글내용</option>
-              <option value="k3" ${map.pager.kind == 'k3' ? 'selected' : '' }>작성자</option>
+              <option value="title" ${pager.kind == 'title' ? 'selected' : '' }>글제목</option>
+              <option value="contents" ${pager.kind == 'contents' ? 'selected' : '' }>글내용</option>
+              <option value="writer" ${pager.kind == 'writer' ? 'selected' : '' }>작성자</option>
             </select>
           </div>
 
@@ -56,8 +58,19 @@
           <tbody>
             <c:forEach items="${requestScope.list}" var="dto">
               <tr>
-                <td>${dto.boardNum}</td>
-                <td><a href="./detail?boardNum=${dto.boardNum}">${dto.boardTitle}</a></td>
+                <td><c:if test="${dto.del eq 0}">
+                  ${dto.boardNum}
+                </c:if></td>
+                <td><c:catch>
+                    <c:forEach begin="1" end="${dto.depth}">--</c:forEach>
+                  </c:catch> <c:choose>
+                    <c:when test="${dto.del eq 0}">
+                      <a href="./detail?boardNum=${dto.boardNum}">${dto.boardTitle}</a>
+                    </c:when>
+                    <c:otherwise>
+                      삭제된 글입니다
+                    </c:otherwise>
+                  </c:choose></td>
                 <td>${dto.boardWriter}</td>
                 <td>${dto.createDate}</td>
                 <td>${dto.boardHit}</td>
