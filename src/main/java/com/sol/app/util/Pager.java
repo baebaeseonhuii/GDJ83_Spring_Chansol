@@ -1,7 +1,5 @@
 package com.sol.app.util;
 
-import java.util.Map;
-
 public class Pager {
 	private Long page;
 	private Long perPage;
@@ -22,7 +20,7 @@ public class Pager {
 		this.setSearch("");
 		this.setPage(1L);
 		this.setKind("k1");
-		this.setPerPage(10L);
+		this.setPerPage(3L);
 	}
 
 	public void makeRow() throws Exception {
@@ -38,7 +36,8 @@ public class Pager {
 			this.setTotalPage(totalCount / this.getPerPage() + 1L);
 		}
 
-		if (this.getPage() > this.getTotalPage()) this.setPage(this.getTotalPage());
+		if (this.getPage() > this.getTotalPage())
+			this.setPage(this.getTotalPage());
 
 		Long totalBlock = (this.getTotalPage() / this.getPerBlock());
 		if (this.getTotalPage() * this.getPerBlock() != 0L) {
@@ -50,13 +49,17 @@ public class Pager {
 			curBlock = (this.getPage() / this.getPerBlock() + 1L);
 		}
 
-		if (curBlock > totalBlock) curBlock = totalBlock;
-		if (curBlock < 1) curBlock = 1L;
+		if (curBlock > totalBlock)
+			curBlock = totalBlock;
+		if (curBlock < 1)
+			curBlock = 1L;
 
 		this.setStartNum((curBlock - 1L) * this.getPerBlock() + 1L);
 		this.setLastNum(this.getStartNum() + this.getPerBlock() - 1L);
-		if (this.getLastNum() > this.getTotalPage()) this.setLastNum(this.getTotalPage());
-		if (this.getStartNum() > this.getLastNum()) this.setStartNum(this.getLastNum() + 1L);
+		if (this.getLastNum() > this.getTotalPage())
+			this.setLastNum(this.getTotalPage());
+		if (this.getStartNum() > this.getLastNum())
+			this.setStartNum(this.getLastNum() + 1L);
 
 		this.setPre(this.getStartNum() != 1 ? true : false);
 		this.setNext(this.getLastNum() != this.getTotalPage() ? true : false);
@@ -64,7 +67,8 @@ public class Pager {
 	}
 
 	public Long getPage() {
-		if (this.page == null || this.page < 1) this.page = 1L;
+		if (this.page == null || this.page < 1)
+			this.page = 1L;
 		return page;
 	}
 
@@ -97,7 +101,8 @@ public class Pager {
 	}
 
 	public String getSearch() {
-		if (this.search == null) this.search = "";
+		if (this.search == null)
+			this.search = "";
 		return search;
 	}
 
