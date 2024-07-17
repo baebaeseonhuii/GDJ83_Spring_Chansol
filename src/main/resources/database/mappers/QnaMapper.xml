@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper는 테이블 별로 하나씩 만들 거다. namespace는 중복되면 안된다. -->
+<mapper namespace="com.sol.app.boards.qnas.QnaDAO">
+
+	<sql id="searchSql">
+		<where>	
+			BOARDNUM > 0
+			<choose>
+				<when test="kind == 'title'">
+					AND BOARDTITLE LIKE '%'||#{search}||'%'
+				</when>
+				<when test="kind == 'contents'">
+					AND BOARDCONTENTS LIKE '%'||#{search}||'%'
+				</when>
+				<otherwise>
+					AND BOARDWRITER LIKE '%'||#{search}||'%'
+				</otherwise>
+			</choose>
+		</where>
+	</sql>
+
+	<select id="getList" parameterType="Pager" resultType="QnaDTO">
+		
+		SELECT * FROM (
+		
+			SELECT ROWNUM r, q.* FROM (
+			
+				SELECT * FROM QNA
+				<include refid="searchSql"/>
+				ORDER BY REF DESC, STEP ASC
+			) q
+		)
+		WHERE r BETWEEN #{startRow} AND #{lastRow}
+		
+	</select>
+	
+	<select id="countList" parameterType="Pager" resultType="java.lang.Long">
+		SELECT COUNT(BOARDNUM) FROM QNA 
+		<include refid="searchSql"/>
+	</select>
+	
+	<insert id="add" parameterType="QnaDTO">
+		INSERT INTO QNA (
+			BOARDNUM, BOARDWRITER, BOARDTITLE, BOARDCONTENTS
+			, BOARDCATEGORY, REF, STEP, DEPTH
+		)
+		VALUES (
+			BOARD_SEQ.NEXTVAL, #{boardWriter}, #{boardTitle}, #{boardContents}
+			, 'Q', BOARD_SEQ.CURRVAL, 0 , 0
+		)
+	</insert>
+	
+	<insert id="reply" parameterType="QnaDTO">
+		INSERT INTO QNA (
+		BOARDNUM, BOARDWRITER, BOARDTITLE, BOARDCONTENTS
+		, BOARDCATEGORY, REF, STEP, DEPTH
+		)
+		VALUES (
+			BOARD_SEQ.NEXTVAL, #{boardWriter}, #{boardTitle}, #{boardContents}
+			, 'Q', #{ref}, #{step} , #{depth}
+		)
+	</insert>
+	
+	<update id="replyUpdate" parameterType="QnaDTO">
+		UPDATE	QNA
+		SET		STEP = STEP + 1
+		WHERE	REF = #{ref}
+				AND STEP > #{step}
+	</update>
+	
+	<select id="getDetail" parameterType="QnaDTO" resultType="QnaDTO">
+		SELECT * FROM QNA WHERE BOARDNUM = #{boardNum} AND DEL = 0
+	</select>
+	
+	<update id="update" parameterType="QnaDTO">
+		UPDATE	QNA
+		SET		BOARDTITLE = #{boardTitle}, BOARDCONTENTS = #{boardContents}, UPDATEDATE = SYSDATE
+		WHERE	BOARDNUM = #{boardNum}
+	</update>
+	
+	<delete id="delete" parameterType="QnaDTO">
+		UPDATE	QNA
+		SET		DEL = 1
+		WHERE	BOARDNUM = #{boardNum}
+	</delete>
+</mapper>

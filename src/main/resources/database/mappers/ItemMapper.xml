@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper는 테이블 별로 하나씩 만들 거다. namespace는 중복되면 안됨 -->
+<!-- 따라서 namespace의 이름은 DAO가 존재하는 패키지의 명을 포함하여 작성해줌 -->
+<mapper namespace="com.sol.app.product.ItemDAO">
+	
+	<!-- <select id="getList" resultType="ItemDTO">
+		SELECT * FROM ITEMS ORDER BY ITEM_ID DESC
+	</select> -->
+	
+	<select id="getDetail" resultType="ItemDTO" parameterType="ItemDTO">
+		SELECT * FROM ITEMS WHERE ITEM_ID = #{item_id}
+	</select>
+	
+	<insert id="add" parameterType="ItemDTO">
+		INSERT INTO ITEMS
+		VALUES(ITEMS_SEQ.NEXTVAL, #{item_name} ,#{item_detail} ,#{item_rate})
+	</insert>
+	
+	<delete id="delete" parameterType="ItemDTO">
+		DELETE ITEMS WHERE ITEM_ID = #{item_id}
+	</delete>
+	
+	<update id="update" parameterType="ItemDTO">
+		UPDATE ITEMS SET
+			ITEM_NAME = #{item_name}
+		,	ITEM_DETAIL = #{item_detail}
+		,	ITEM_RATE = #{item_rate}
+		WHERE ITEM_ID = #{item_id} 
+	</update>
+	
+	<select id="getList" resultType="ItemDTO" parameterType="Pager">
+		<![CDATA[
+		]]>
+			SELECT * FROM 
+			(	SELECT 		ROWNUM r, i.*
+				FROM	(	SELECT 		*
+							FROM 		ITEMS
+							<where>		
+										ITEM_ID > 0	
+								<choose>
+									<when test="kind == 'k1'">
+										AND ITEM_NAME LIKE '%'||#{search}||'%'
+									</when>
+									<otherwise>
+										AND ITEM_DETAIL LIKE '%'||#{search}||'%'
+									</otherwise>
+								</choose>
+							</where>
+							ORDER BY	ITEM_ID DESC	) i)
+			WHERE	r BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<select id="countList" resultType="java.lang.Long" parameterType="Pager">
+		SELECT COUNT(ITEM_ID) FROM ITEMS
+		<where>		
+				ITEM_ID > 0	
+		<choose>
+			<when test="kind == 'k1'">
+				AND ITEM_NAME LIKE '%'||#{search}||'%'
+			</when>
+			<otherwise>
+				AND ITEM_DETAIL LIKE '%'||#{search}||'%'
+			</otherwise>
+		</choose>
+	</where>
+	</select>
+	
+	<select id="countSearch" parameterType="Pager" resultType="java.lang.Long">
+		SELECT COUNT(ITEM_ID)
+		FROM ITEMS
+		<where>		
+			ITEM_ID > 0	
+			<choose>
+				<when test="kind == 'k1'">
+					AND ITEM_NAME LIKE '%'||#{search}||'%'
+				</when>
+				<otherwise>
+					AND ITEM_DETAIL LIKE '%'||#{search}||'%'
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+</mapper>

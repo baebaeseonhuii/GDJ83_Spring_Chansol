@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper는 테이블 별로 하나씩 만들 거다. namespace는 중복되면 안된다. -->
+<mapper namespace="com.sol.app.boards.notices.NoticeDAO">
+
+	<sql id="searchSql">
+		<where>		
+			BOARDNUM > 0	
+			<choose>
+				<when test="kind == 'k1'">
+					AND BOARDTITLE LIKE '%'||#{search}||'%'
+				</when>
+				<when test="kind == 'k3'">
+					AND BOARDWRITER LIKE '%'||#{search}||'%'
+				</when>
+				<otherwise>
+					AND BOARDCONTENTS LIKE '%'||#{search}||'%'
+				</otherwise>
+			</choose>
+		</where>
+	</sql>
+	
+	<select id="getList" parameterType="Pager" resultType="NoticeDTO">
+		SELECT * FROM 
+		(	SELECT 		ROWNUM r, n.*
+			FROM	(	SELECT 		*
+						FROM 		NOTICE
+						<include refid="searchSql"/>
+						ORDER BY	BOARDNUM DESC	) n)
+		WHERE	r BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<select id="countList" parameterType="Pager" resultType="java.lang.Long">
+		SELECT	COUNT(BOARDNUM)
+		FROM	(
+			SELECT	*
+			FROM	NOTICE
+			<include refid="searchSql"/>
+		)
+	</select>
+	
+	<update id="update" parameterType="NoticeDTO">
+		UPDATE	NOTICE
+		SET		BOARDTITLE = #{boardTitle}, BOARDCONTENTS = #{boardContents}
+		WHERE 	BOARDNUM = #{boardNum}
+	</update>
+	
+	<insert id="add" parameterType="NoticeDTO">
+		INSERT INTO NOTICE (
+			BOARDNUM, BOARDWRITER, BOARDTITLE
+		,	BOARDCONTENTS, BOARDCATEGORY
+		)
+		VALUES (
+			BOARD_SEQ.NEXTVAL, #{boardWriter}, #{boardTitle}
+		,	#{boardContents}, NULL
+		)
+	</insert>
+	
+	<select id="getDetail" parameterType="NoticeDTO" resultType="NoticeDTO">
+		SELECT * FROM NOTICE WHERE BOARDNUM=#{boardNum}
+	</select>
+	
+	<delete id="delete" parameterType="NoticeDTO">
+		DELETE NOTICE WHERE BOARDNUM=#{boardNum}
+	</delete>
+	
+	<update id="hit" parameterType="NoticeDTO">
+		UPDATE NOTICE
+		SET BOARDHIT = BOARDHIT+1
+		WHERE BOARDNUM = #{boardNum}
+	</update>
+	
+	<select id="countSearch" parameterType="Pager" resultType="java.lang.Long">
+		SELECT COUNT(BOARDNUM)
+		FROM NOTICE	
+		<include refid="searchSql"/>
+	</select>
+</mapper>

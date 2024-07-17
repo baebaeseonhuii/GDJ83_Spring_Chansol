@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+ <configuration>
+ 	<typeAliases>
+ 		<typeAlias type="com.sol.app.product.ItemDTO" alias="ItemDTO"/>
+ 		<typeAlias type="com.sol.app.members.MemberDTO" alias="MemberDTO"/>
+ 		<typeAlias type="com.sol.app.accounts.AccountDTO" alias="AccountDTO"/>
+ 		<typeAlias type="com.sol.app.accounts.ListOption" alias="ListOption"/>
+ 		<typeAlias type="com.sol.app.bank_infos.Bank_infosDTO" alias="Bank_infosDTO"/>
+ 		<typeAlias type="com.sol.app.boards.notices.NoticeDTO" alias="NoticeDTO"/>
+ 		<typeAlias type="com.sol.app.boards.qnas.QnaDTO" alias="QnaDTO"/>
+ 		<typeAlias type="com.sol.app.boards.BoardDTO" alias="BoardDTO"/>
+ 		<typeAlias type="java.util.Map" alias="Map"/>
+ 		<typeAlias type="java.util.List" alias="List"/>
+ 		<typeAlias type="com.sol.app.util.Pager" alias="Pager"/>
+ 	</typeAliases>
+ </configuration>

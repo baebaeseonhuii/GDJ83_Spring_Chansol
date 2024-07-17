@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.sol.app.accounts.AccountDAO">
+  
+  	<insert id="add" parameterType="AccountDTO">
+  		INSERT INTO BANK (BANK_ID, MEMBER_ID, ITEM_ID, BANK_PW, BALANCE)
+  		VALUES(
+  			LPAD(TO_CHAR(#{item_id}), 4, '0') || LPAD(TO_CHAR(BANKID_SEQ.NEXTVAL), 8, '0'),
+  			#{member_id},
+  			#{item_id},
+  			#{bank_pw},
+  			100000
+  			<!-- #{balance} -->
+  			)
+  	</insert>
+  	
+  	<select id="getList" parameterType="MemberDTO" resultType="AccountDTO">
+  		SELECT	BANK_ID, BALANCE
+  		FROM	BANK
+  		WHERE	MEMBER_ID = #{member_id}
+  	</select>
+  	
+  	<select id="detail" parameterType="AccountDTO" resultMap="detailResult">
+  		SELECT	b.*, i.*
+  		FROM	BANK b INNER JOIN ITEMS i
+  				ON b.ITEM_ID = i.ITEM_ID
+  		WHERE	b.BANK_ID = #{bank_id}
+  	</select>
+  	
+  	<update id="transfer" parameterType="Bank_infosDTO">
+  		UPDATE	BANK
+		SET		BALANCE = BALANCE - #{difference}
+		WHERE	BANK_id = #{bank_id}
+  	</update>
+  	
+  	<update id="transferU" parameterType="Bank_infosDTO">
+  		UPDATE	BANK
+		SET		BALANCE = BALANCE + #{difference}
+		WHERE	BANK_id = #{account_u}
+  	</update>
+  	
+  	<resultMap type="AccountDTO" id="detailResult">
+  		<id column="BANK_ID" property="bank_id"/>
+  		
+  		<result column="ITEM_ID" property="item_id"/>
+  		<result column="OPEN_DATE" property="open_date"/>
+  		<result column="BALANCE" property="balance"/>
+  		
+  		<association property="itemDTO" javaType="ItemDTO">
+  			<id column="ITEM_ID" property="item_id"/>
+  			
+  			<result column="ITEM_NAME" property="item_name"/>
+  			<result column="ITEM_RATE" property="item_rate"/>
+  			<result column="ITEM_DETAIL" property="item_detail"/>
+  			
+  		</association>
+  		
+  	</resultMap>
+  	
+  </mapper>
