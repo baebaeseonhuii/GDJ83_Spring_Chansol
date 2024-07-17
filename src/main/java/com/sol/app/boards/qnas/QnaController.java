@@ -20,7 +20,7 @@ import com.sol.app.util.Pager;
 @Controller
 @RequestMapping(value="/qna/*")
 public class QnaController {
-	
+	private int master;
 	@Autowired
 	private QnaService qnaService;
 
