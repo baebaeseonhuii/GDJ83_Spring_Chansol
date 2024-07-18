@@ -44,11 +44,21 @@
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
                                 <h1 class="display-5 fw-bolder text-white mb-2">Chansol Bank</h1>
+                                <c:choose>
+						    <c:when test="${empty sessionScope.member}">
                                 <p class="lead fw-normal text-white-50 mb-4">당장 가입하세요</p>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                                     <a class="btn btn-outline-light btn-lg px-4" href="/members/login">Sign in</a>
                                     <a class="btn btn-outline-light btn-lg px-4" href="/members/join">Sign up</a>
                                 </div>
+						     
+						    </c:when>
+						    <c:otherwise>
+						     	<div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                    <a class="btn btn-outline-light btn-lg px-4" href="/members/mypage">MyPage</a>
+                                </div>
+							</c:otherwise>
+						 </c:choose>
                             </div>
                         </div>
                         <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/meme-boy-gets-paid-4140-c9dfc888677499743410feaf017cfa46@1x.jpg" alt="..." /></div>
