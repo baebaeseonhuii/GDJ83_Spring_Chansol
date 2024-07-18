@@ -28,9 +28,15 @@
                                         <div class="invalid-feedback" data-sb-feedback="name:required">ID is required.</div>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control ch" name="member_pw" id="member_pw" type="text" placeholder="Enter your PW" data-sb-validations="required" />
+                                        <input class="form-control ch" id="member_pw" type="password" placeholder="Enter your PW" data-sb-validations="required" />
                                         <label for="member_pw">Password</label>
                                         <div id="password-error"></div>
+                                        <div class="invalid-feedback" data-sb-feedback="name:required">Password is required.</div>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control ch" name="member_pw" id="member_pwCheck" type="password" placeholder="Enter your PW" data-sb-validations="required" />
+                                        <label for="member_pw">Password</label>
+                                        <div id="password-eqError"></div>
                                         <div class="invalid-feedback" data-sb-feedback="name:required">Password is required.</div>
                                     </div>
                                     <!-- Email address input-->
