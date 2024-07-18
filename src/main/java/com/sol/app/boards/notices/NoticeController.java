@@ -18,13 +18,13 @@ import com.sol.app.members.MemberDTO;
 import com.sol.app.util.Pager;
 
 @Controller
-@RequestMapping(value="/notice/")
+@RequestMapping(value = "/notice/")
 public class NoticeController {
 
 	@Autowired
 	@Qualifier("noticeService")
 	private BoardService boardService;
-	
+
 	@ModelAttribute("board")
 	public String getBoard() {
 		return "Notice";
@@ -33,11 +33,11 @@ public class NoticeController {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String getList(Pager pager, Model model) throws Exception {
 		List<BoardDTO> list = boardService.getList(pager);
-		if(list == null) {
+		if (list == null) {
 			model.addAttribute("result", "게시글이 존재하지 않습니다");
 			model.addAttribute("url", "/board/list");
 			model.addAttribute("board", "notice");
-			return "/commons/message"; 
+			return "/commons/message";
 		}
 		model.addAttribute("list", list);
 		return "/board/list";
@@ -50,7 +50,7 @@ public class NoticeController {
 		model.addAttribute("dto", boardDTO);
 		return "board/detail";
 	}
-	
+
 	public void hit(NoticeDTO noticeDTO) throws Exception {
 		boardService.hit(noticeDTO);
 	}
